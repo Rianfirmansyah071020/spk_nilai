@@ -42,9 +42,7 @@ if($_SESSION['login'] == true) {
 
                                             if(isset($_POST['login'])) {
 
-                                                if(login_pengguna($_POST)) {
-
-                                                    
+                                                if(login_pengguna($_POST)) {                                                    
                                                 }
                                             }
                                         ?>

@@ -9,6 +9,22 @@ session_start();
 
 require "../controller/controller.php";
 
+if(isset($_POST['simpan'])) {
+    
+    if(tambah_siswa($_POST) > 0) {
+
+        echo "<script>
+        alert('Data berhasil di tambahkan');
+        document.location.href='tambah_siswa.php';
+        </script>";
+    }else {
+        echo "<script>
+        alert('Data gagal di tambahkan');
+        document.location.href='tambah_siswa.php';
+        </script>";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -89,71 +105,44 @@ require "../controller/controller.php";
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Data Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Tambah Data Siswa</h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data siswa</li>
+                            <li class="breadcrumb-item active" aria-current="page">Tambah Data siswa</li>
                         </ol>
                     </div>
 
                     <div class="row">
-                        <!-- Datatables -->
-                        <a href="tambah_siswa.php" class="btn btn-success m-3">Tambah</a>
-                        <div class="col-lg-12">
-                            <div class="card mb-4 p-3">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+                        <div class="card col-12 shadow p-4">
+                            <form action="" method="post">
+                                <div class="row mt-3">
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <label for="nama_siswa">Nama</label>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-12">
+                                        <input type="text" name="nama_siswa" id="nama_siswa" class="form-control"
+                                            placeholder="nama: xxxxx" required>
+                                    </div>
                                 </div>
-                                <div class="table-responsive p-3">
-                                    <table class="table table-bordered align-items-center" id="dataTable"
-                                        style="font-size:small;">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th class="text-center">No</th>
-                                                <th class="text-center">NISN</th>
-                                                <th class="text-center">Nama</th>
-                                                <th class="text-center">_____Aksi_____</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th class="text-center">No</th>
-                                                <th class="text-center">NISN</th>
-                                                <th class="text-center">Nama</th>
-                                                <th class="text-center">_____Aksi_____</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-
-                                            <?php
-                                            $no = 1;
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY nama_siswa ASC");                                                                                    
-                                            ?>
-
-                                            <?php 
-                                            foreach ($dataSiswa as $data) :
-                                            ?>
-                                            <tr>
-                                                <td class="text-center"><?= $no++; ?></td>
-                                                <td class="text-center"><?= $data['nisn_siswa'] ?></td>
-                                                <td><?= $data['nama_siswa'] ?></td>
-                                                <td class="text-center">
-                                                    <a href="edit_siswa.php?id_siswa=<?= $data['id_siswa'] ?>"
-                                                        class="btn btn-warning">edit</a>
-                                                    <a href="hapus_siswa.php?id_siswa=<?= $data['id_siswa'] ?>"
-                                                        class="btn btn-danger"
-                                                        onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
-                                                </td>
-                                            </tr>
-
-                                            <?php endforeach ?>
-
-
-                                        </tbody>
-                                    </table>
+                                <div class="row mt-3">
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <label for="nisn_siswa">NISN</label>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <input type="text" name="nisn_siswa" id="nisn_siswa" class="form-control"
+                                            placeholder="nisn: xxxxx" required>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="mt-5 row">
+                                    <div>
+                                        <button type="submit" name="simpan" class="btn btn-success m-3">simpan</button>
+                                    </div>
+                                    <div>
+                                        <a href="siswa.php" class="btn btn-warning m-3">kembali</a>
+                                    </div>
+
+                                </div>
+                            </form>
                         </div>
                     </div>
 

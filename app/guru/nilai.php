@@ -89,16 +89,16 @@ require "../controller/controller.php";
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Data Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Data Nilai Siswa</h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data siswa</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data nilai siswa</li>
                         </ol>
                     </div>
 
                     <div class="row">
                         <!-- Datatables -->
-                        <a href="tambah_siswa.php" class="btn btn-success m-3">Tambah</a>
+                        <a href="tambah_nilai.php" class="btn btn-success m-3">Tambah</a>
                         <div class="col-lg-12">
                             <div class="card mb-4 p-3">
                                 <div
@@ -112,7 +112,11 @@ require "../controller/controller.php";
                                             <tr>
                                                 <th class="text-center">No</th>
                                                 <th class="text-center">NISN</th>
-                                                <th class="text-center">Nama</th>
+                                                <th class="text-center">Rata-Rata</th>
+                                                <th class="text-center">Rangking</th>
+                                                <th class="text-center">Sikap</th>
+                                                <th class="text-center">Ekstrakurikuler</th>
+                                                <th class="text-center">Prestasi</th>
                                                 <th class="text-center">_____Aksi_____</th>
                                             </tr>
                                         </thead>
@@ -120,7 +124,11 @@ require "../controller/controller.php";
                                             <tr>
                                                 <th class="text-center">No</th>
                                                 <th class="text-center">NISN</th>
-                                                <th class="text-center">Nama</th>
+                                                <th class="text-center">Rata-Rata</th>
+                                                <th class="text-center">Rangking</th>
+                                                <th class="text-center">Sikap</th>
+                                                <th class="text-center">Ekstrakurikuler</th>
+                                                <th class="text-center">Prestasi</th>
                                                 <th class="text-center">_____Aksi_____</th>
                                             </tr>
                                         </tfoot>
@@ -128,20 +136,24 @@ require "../controller/controller.php";
 
                                             <?php
                                             $no = 1;
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY nama_siswa ASC");                                                                                    
+                                            $dataNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa ORDER BY nilai_rata_rata ASC");                                                                                    
                                             ?>
 
                                             <?php 
-                                            foreach ($dataSiswa as $data) :
+                                            foreach ($dataNilaiSiswa as $data) :
                                             ?>
                                             <tr>
                                                 <td class="text-center"><?= $no++; ?></td>
                                                 <td class="text-center"><?= $data['nisn_siswa'] ?></td>
-                                                <td><?= $data['nama_siswa'] ?></td>
+                                                <td class="text-center"><?= $data['nilai_rata_rata'] ?></td>
+                                                <td class="text-center"><?= $data['nilai_rangking'] ?></td>
+                                                <td class="text-center"><?= $data['nilai_sikap'] ?></td>
+                                                <td class="text-center"><?= $data['nilai_ekstrakurikuler'] ?></td>
+                                                <td class="text-center"><?= $data['nilai_ekstrakurikuler'] ?></td>
                                                 <td class="text-center">
-                                                    <a href="edit_siswa.php?id_siswa=<?= $data['id_siswa'] ?>"
+                                                    <a href="edit_nilai.php?id_nilai=<?= $data['id_nilai'] ?>"
                                                         class="btn btn-warning">edit</a>
-                                                    <a href="hapus_siswa.php?id_siswa=<?= $data['id_siswa'] ?>"
+                                                    <a href="hapus_nilai.php?id_nilai=<?= $data['id_nilai'] ?>"
                                                         class="btn btn-danger"
                                                         onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
                                                 </td>
