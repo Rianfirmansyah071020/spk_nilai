@@ -1,9 +1,13 @@
 <?php
+session_start();
+error_reporting(0);
+if($_SESSION['login'] == true) {
 
-require "../controller/controller.php";
+    header('Location:../guru/siswa.php');
+    exit;
+}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,6 +37,17 @@ require "../controller/controller.php";
                                 <div class="login-form">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Disini</h1>
+                                        <?php
+                                            require "../controller/controller.php";
+
+                                            if(isset($_POST['login'])) {
+
+                                                if(login_pengguna($_POST)) {
+
+                                                    
+                                                }
+                                            }
+                                        ?>
                                     </div>
                                     <form class="user" action="" method="post">
                                         <div class="form-group">
@@ -45,7 +60,8 @@ require "../controller/controller.php";
                                                 id="exampleInputPassword" placeholder="Password" required>
                                         </div>
                                         <div class="form-group mt-4">
-                                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                                            <button type="submit" name="login"
+                                                class="btn btn-primary w-100">Login</button>
                                         </div>
                                     </form>
                                     <hr>
