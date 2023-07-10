@@ -163,7 +163,7 @@ if(isset($_POST['simpan'])) {
                                         <button type="submit" name="simpan" class="btn btn-success m-3">simpan</button>
                                     </div>
                                     <div>
-                                        <a href="siswa.php" class="btn btn-warning m-3">kembali</a>
+                                        <a href="nilai.php" class="btn btn-warning m-3">kembali</a>
                                     </div>
 
                                 </div>

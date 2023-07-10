@@ -19,7 +19,7 @@
     <li class="nav-item">
         <a class="nav-link" href="nilai.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Nilai</span>
+            <span>Nilai Siswa</span>
         </a>
     </li>
     <li class="nav-item">

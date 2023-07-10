@@ -87,7 +87,7 @@ require "../controller/controller.php";
                                         <thead class="thead-light">
                                             <tr>
                                                 <th class="text-center">No</th>
-                                                <th class="text-center">NISN</th>
+                                                <th class="text-center">Nama</th>
                                                 <th class="text-center">Rata-Rata</th>
                                                 <th class="text-center">Rangking</th>
                                                 <th class="text-center">Sikap</th>
@@ -99,7 +99,7 @@ require "../controller/controller.php";
                                         <tfoot>
                                             <tr>
                                                 <th class="text-center">No</th>
-                                                <th class="text-center">NISN</th>
+                                                <th class="text-center">Nama</th>
                                                 <th class="text-center">Rata-Rata</th>
                                                 <th class="text-center">Rangking</th>
                                                 <th class="text-center">Sikap</th>
@@ -120,7 +120,7 @@ require "../controller/controller.php";
                                             ?>
                                             <tr>
                                                 <td class="text-center"><?= $no++; ?></td>
-                                                <td class="text-center"><?= $data['nisn_siswa'] ?></td>
+                                                <td class="text-start"><?= $data['nama_siswa'] ?></td>
                                                 <td class="text-center"><?= $data['nilai_rata_rata'] ?></td>
                                                 <td class="text-center"><?= $data['nilai_rangking'] ?></td>
                                                 <td class="text-center"><?= $data['nilai_sikap'] ?></td>
