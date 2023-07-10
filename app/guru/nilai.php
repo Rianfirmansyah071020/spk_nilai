@@ -79,7 +79,7 @@ require "../controller/controller.php";
                             <div class="card mb-4 p-3">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Nilai Siswa</h6>
                                 </div>
                                 <div class="table-responsive p-3">
                                     <table class="table table-bordered align-items-center" id="dataTable"

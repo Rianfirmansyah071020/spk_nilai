@@ -9,18 +9,22 @@ session_start();
 
 require "../controller/controller.php";
 
+$id_nilai = $_GET['id_nilai'];
+$dataNilaiById = mysqli_query($koneksi, "SELECT * FROM tb_nilai WHERE id_nilai = '$id_nilai'");
+$dataNilaiById = mysqli_fetch_array($dataNilaiById);
+
 if(isset($_POST['simpan'])) {
     
-    if(tambah_nilai($_POST) > 0) {
+    if(edit_nilai($_POST, $id_nilai) > 0) {
 
         echo "<script>
-        alert('Data berhasil di tambahkan');
-        document.location.href='tambah_nilai.php';
+        alert('Data berhasil di edit');
+        document.location.href='nilai.php';
         </script>";
     }else {
         echo "<script>
-        alert('Data gagal di tambahkan');
-        document.location.href='tambah_nilai.php';
+        alert('Data gagal di edit');
+        document.location.href='nilai.php';
         </script>";
     }
 }
@@ -63,21 +67,20 @@ if(isset($_POST['simpan'])) {
                         <i class="fa fa-bars"></i>
                     </button>
                     <ul class="navbar-nav ml-auto">
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="ml-2 d-none d-lg-inline text-white small"><?= $_SESSION['nama'] ?></span>
+                        <div class="topbar-divider d-none d-sm-block"></div <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="ml-2 d-none d-lg-inline text-white small"><?= $_SESSION['nama'] ?></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
+                                data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
+                        </div>
                         </li>
                     </ul>
                 </nav>
@@ -86,10 +89,10 @@ if(isset($_POST['simpan'])) {
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Tambah Data Nilai Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Edit Data Nilai Siswa</h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tambah Data nilai siswa</li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Data nilai siswa</li>
                         </ol>
                     </div>
 
@@ -106,7 +109,9 @@ if(isset($_POST['simpan'])) {
                                             <?php
                                         $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa ASC");
                                         foreach ($dataSiswa as $siswa) : ?>
-                                            <option value="<?= $siswa['id_siswa'] ?>"><?= $siswa['nama_siswa'] ?>
+                                            <option value="<?= $siswa['id_siswa'] ?>"
+                                                <?php if($dataNilaiById['id_siswa'] == $siswa['id_siswa']) echo "selected" ?>>
+                                                <?= $siswa['nama_siswa'] ?>
                                             </option>
 
                                             <?php endforeach ?>
@@ -118,8 +123,9 @@ if(isset($_POST['simpan'])) {
                                         <label for="nilai_rata_rata">Rata-Rata</label>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
-                                        <input type="number" step="any" name="nilai_rata_rata" id="nilai_rata_rata"
-                                            class="form-control" placeholder="nilai rata-rata: xxxxx" required>
+                                        <input type="number" step="any" value="<?= $dataNilaiById['nilai_rata_rata'] ?>"
+                                            name="nilai_rata_rata" id="nilai_rata_rata" class="form-control"
+                                            placeholder="nilai rata-rata: xxxxx" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -128,7 +134,8 @@ if(isset($_POST['simpan'])) {
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
                                         <input type="number" name="nilai_rangking" id="nilai_rangking"
-                                            class="form-control" placeholder="nilai rangking: xxxxx" required>
+                                            value="<?= $dataNilaiById['nilai_rangking'] ?>" class="form-control"
+                                            placeholder="nilai rangking: xxxxx" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -136,7 +143,8 @@ if(isset($_POST['simpan'])) {
                                         <label for="nilai_sikap">Sikap</label>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
-                                        <input type="number" name="nilai_sikap" id="nilai_sikap" class="form-control"
+                                        <input type="number" name="nilai_sikap" id="nilai_sikap"
+                                            value="<?= $dataNilaiById['nilai_sikap'] ?>" class="form-control"
                                             placeholder="nilai sikap: xxxxx" required>
                                     </div>
                                 </div>
@@ -146,7 +154,8 @@ if(isset($_POST['simpan'])) {
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
                                         <input type="number" name="nilai_ekstrakurikuler" id="nilai_ekstrakurikuler"
-                                            class="form-control" placeholder="nilai ekstrakurikuler: xxxx" required>
+                                            class="form-control" value="<?= $dataNilaiById['nilai_ekstrakurikuler'] ?>"
+                                            placeholder="nilai ekstrakurikuler: xxxx" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -155,7 +164,8 @@ if(isset($_POST['simpan'])) {
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
                                         <input type="number" name="nilai_prestasi" id="nilai_prestasi"
-                                            class="form-control" placeholder="nilai prestasi: xxxxx" required>
+                                            class="form-control" value="<?= $dataNilaiById['nilai_prestasi'] ?>"
+                                            placeholder="nilai prestasi: xxxxx" required>
                                     </div>
                                 </div>
                                 <div class="mt-5 row">
