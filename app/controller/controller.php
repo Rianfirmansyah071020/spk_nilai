@@ -98,6 +98,145 @@ function tambah_nilai($data) {
     $nilai_prestasi = htmlspecialchars($data['nilai_prestasi']);
 
 
+    if($nilai_rata_rata > 100) {
+
+        echo "<script>
+        alert('Mohon perhatikan lagi nilai yang anda masukan, nilai maksimal 100');
+        document.location.href='';        
+        </script>";
+        return false;
+    }    
+
+    
+    // proses nilai rata-rata
+    if($nilai_rata_rata >= 91 && $nilai_rata_rata <= 100){
+        
+        $nilai_skala_rata_rata = 5;
+        $nilai_bobot_rata_rata = 1;
+    
+    }else if($nilai_rata_rata >= 81 && $nilai_rata_rata <= 90) {
+
+        $nilai_skala_rata_rata = 4;
+        $nilai_bobot_rata_rata = 0.8;
+    
+    }else if($nilai_rata_rata >= 71 && $nilai_rata_rata <= 80) {
+
+        $nilai_skala_rata_rata = 3;
+        $nilai_bobot_rata_rata = 0.6;
+    
+    }else if($nilai_rata_rata >= 51 && $nilai_rata_rata <= 70) {
+
+        $nilai_skala_rata_rata = 2;
+        $nilai_bobot_rata_rata = 0.4;
+    
+    }else if($nilai_rata_rata >= 0 && $nilai_rata_rata <= 50) {
+
+        $nilai_skala_rata_rata = 1;
+        $nilai_bobot_rata_rata = 0.2;
+    }
+
+
+
+
+    // proses nilai rangking
+    if($nilai_rangking == 1){
+                
+        $nilai_bobot_rangking = 1;
+        $rangking = 'Sangat Tinggi';
+    
+    }else if($nilai_rangking >= 2 && $nilai_rangking <= 4) {
+        
+        $nilai_bobot_rangking = 0.8;
+        $rangking = 'Tinggi';
+    
+    }else if($nilai_rangking >= 5 && $nilai_rangking <= 7) {
+        
+        $nilai_bobot_rangking = 0.6;
+        $rangking = 'Menengah';
+    
+    }else if($nilai_rangking >= 8 && $nilai_rangking <= 10) {
+
+        $nilai_bobot_rangking = 0.4;
+        $rangking = 'Rendah';
+    
+    }else if($nilai_rangking >= 11 ) {
+        
+        $nilai_bobot_rangking = 0.2;
+        $rangking = 'Sangat Rendah';
+    }
+
+
+
+    // proses nilai sikap
+    if($nilai_sikap == 5){
+                
+        $nilai_bobot_sikap = 1;        
+    
+    }else if($nilai_sikap == 4) {
+        
+        $nilai_bobot_sikap = 0.8;        
+    
+    }else if($nilai_sikap == 3) {
+        
+        $nilai_bobot_sikap = 0.6;        
+    
+    }else if($nilai_sikap == 2) {
+
+        $nilai_bobot_sikap = 0.4;        
+    
+    }else if($nilai_sikap <= 1 ) {
+        
+        $nilai_bobot_sikap = 0.2;        
+    }
+
+
+    if($nilai_ekstrakurikuler == 5){
+                
+        $nilai_bobot_ekstrakurikuler = 1;        
+    
+    }else if($nilai_ekstrakurikuler == 4) {
+        
+        $nilai_bobot_ekstrakurikuler = 0.8;        
+    
+    }else if($nilai_ekstrakurikuler == 3) {
+        
+        $nilai_bobot_ekstrakurikuler = 0.6;        
+    
+    }else if($nilai_ekstrakurikuler == 2) {
+
+        $nilai_bobot_ekstrakurikuler = 0.4;        
+    
+    }else if($nilai_ekstrakurikuler <= 1 ) {
+        
+        $nilai_bobot_ekstrakurikuler = 0.2;        
+    }
+
+
+
+
+    // proses nilai prestasi
+    if($nilai_prestasi >= 9){
+                
+        $nilai_bobot_prestasi = 1;        
+    
+    }else if($nilai_prestasi >= 6 && $nilai_prestasi <= 8) {
+        
+        $nilai_bobot_prestasi = 0.75;        
+    
+    }else if($nilai_prestasi >= 3 && $nilai_prestasi <= 5) {
+        
+        $nilai_bobot_prestasi = 0.55;        
+    
+    }else if($nilai_prestasi >= 1 && $nilai_prestasi <= 2) {
+
+        $nilai_bobot_prestasi = 0.35;        
+    
+    }else if($nilai_prestasi <= 0 ) {
+        
+        $nilai_bobot_prestasi = 0;        
+    }
+
+
     $query = mysqli_query($koneksi, "SELECT max(id_nilai) as id_nilai FROM tb_nilai");
     $data = mysqli_fetch_array($query);
     $idBaru = $data['id_nilai'];    
@@ -107,6 +246,19 @@ function tambah_nilai($data) {
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
     $tambahNilai = mysqli_query($koneksi, "INSERT INTO tb_nilai (id_nilai, id_siswa, nilai_rata_rata,nilai_rangking,nilai_sikap,nilai_ekstrakurikuler,nilai_prestasi) VALUES ('$idBaru', '$id_siswa','$nilai_rata_rata','$nilai_rangking','$nilai_sikap','$nilai_ekstrakurikuler', '$nilai_prestasi')");
+
+
+
+    $query = mysqli_query($koneksi, "SELECT max(id_rating_kecocokan) as id_rating_kecocokan FROM tb_rating_kecocokan");
+    $data = mysqli_fetch_array($query);
+    $idBaru = $data['id_rating_kecocokan'];    
+    $urutan = (int) substr($idBaru, 8, 8);    
+    $urutan++;    
+    $huruf = "RK". date('ymd');
+    $idBaruRating = $huruf . sprintf("%08s", $urutan);
+    
+    
+    $tambahNilaiKecocokan = mysqli_query($koneksi, "INSERT INTO tb_rating_kecocokan (id_rating_kecocokan, id_siswa, rating_kecocokan_rata,rating_kecocokan_rangking,rating_kecocokan_sikap,rating_kecocokan_ekstrakurikuler,rating_kecocokan_prestasi) VALUES ('$idBaruRating', '$id_siswa','$nilai_bobot_rata_rata','$nilai_bobot_rangking','$nilai_bobot_sikap','$nilai_bobot_ekstrakurikuler', '$nilai_bobot_prestasi')");
 
     return mysqli_affected_rows($koneksi);
 }

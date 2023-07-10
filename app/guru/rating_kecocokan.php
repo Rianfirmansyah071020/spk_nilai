@@ -65,10 +65,10 @@ require "../controller/controller.php";
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Data Nilai Proses Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Data Rating Kecocokan</h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data nilai proses siswa</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data rating kecocokan</li>
                         </ol>
                     </div>
 
@@ -92,7 +92,6 @@ require "../controller/controller.php";
                                                 <th class="text-center">Sikap</th>
                                                 <th class="text-center">Ekstrakurikuler</th>
                                                 <th class="text-center">Prestasi</th>
-                                                <th class="text-center">_____Aksi_____</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -104,14 +103,13 @@ require "../controller/controller.php";
                                                 <th class="text-center">Sikap</th>
                                                 <th class="text-center">Ekstrakurikuler</th>
                                                 <th class="text-center">Prestasi</th>
-                                                <th class="text-center">_____Aksi_____</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
 
                                             <?php
                                             $no = 1;
-                                            $dataNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa ORDER BY nilai_rata_rata ASC");                                                                                    
+                                            $dataNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_rating_kecocokan INNER JOIN tb_siswa ON tb_rating_kecocokan.id_siswa = tb_siswa.id_siswa ORDER BY id_rating_kecocokan ASC ");                                                                                    
                                             ?>
 
                                             <?php 
@@ -120,18 +118,12 @@ require "../controller/controller.php";
                                             <tr>
                                                 <td class="text-center"><?= $no++; ?></td>
                                                 <td class="text-center"><?= $data['nisn_siswa'] ?></td>
-                                                <td class="text-center"><?= $data['nilai_rata_rata'] ?></td>
-                                                <td class="text-center"><?= $data['nilai_rangking'] ?></td>
-                                                <td class="text-center"><?= $data['nilai_sikap'] ?></td>
-                                                <td class="text-center"><?= $data['nilai_ekstrakurikuler'] ?></td>
-                                                <td class="text-center"><?= $data['nilai_ekstrakurikuler'] ?></td>
+                                                <td class="text-center"><?= $data['rating_kecocokan_rata'] ?></td>
+                                                <td class="text-center"><?= $data['rating_kecocokan_rangking'] ?></td>
+                                                <td class="text-center"><?= $data['rating_kecocokan_sikap'] ?></td>
                                                 <td class="text-center">
-                                                    <a href="edit_nilai.php?id_nilai=<?= $data['id_nilai'] ?>"
-                                                        class="btn btn-warning">edit</a>
-                                                    <a href="hapus_nilai.php?id_nilai=<?= $data['id_nilai'] ?>"
-                                                        class="btn btn-danger"
-                                                        onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
-                                                </td>
+                                                    <?= $data['rating_kecocokan_ekstrakurikuler'] ?></td>
+                                                <td class="text-center"><?= $data['rating_kecocokan_prestasi'] ?></td>
                                             </tr>
 
                                             <?php endforeach ?>

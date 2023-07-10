@@ -23,9 +23,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="nilai_proses.php">
+        <a class="nav-link" href="rating_kecocokan.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Nilai Setelah Proses</span>
+            <span>Rating Kecocokan</span>
         </a>
     </li>
     <hr class="sidebar-divider">

@@ -112,7 +112,7 @@ require "../controller/controller.php";
 
                                             <?php
                                             $no = 1;
-                                            $dataNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa ORDER BY nilai_rata_rata ASC");                                                                                    
+                                            $dataNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa ORDER BY id_nilai ASC");                                                                                    
                                             ?>
 
                                             <?php 
