@@ -243,9 +243,9 @@ function tambah_nilai($data) {
     $urutan = (int) substr($idBaru, 8, 8);    
     $urutan++;    
     $huruf = "NL". date('ymd');
-    $idBaru = $huruf . sprintf("%08s", $urutan);
+    $kodeBaruNilai = $huruf . sprintf("%08s", $urutan);
 
-    $tambahNilai = mysqli_query($koneksi, "INSERT INTO tb_nilai (id_nilai, id_siswa, nilai_rata_rata,nilai_rangking,nilai_sikap,nilai_ekstrakurikuler,nilai_prestasi) VALUES ('$idBaru', '$id_siswa','$nilai_rata_rata','$nilai_rangking','$nilai_sikap','$nilai_ekstrakurikuler', '$nilai_prestasi')");
+    $tambahNilai = mysqli_query($koneksi, "INSERT INTO tb_nilai (id_nilai, id_siswa, nilai_rata_rata,nilai_rangking,nilai_sikap,nilai_ekstrakurikuler,nilai_prestasi) VALUES ('$kodeBaruNilai', '$id_siswa','$nilai_rata_rata','$nilai_rangking','$nilai_sikap','$nilai_ekstrakurikuler', '$nilai_prestasi')");
 
 
 
@@ -258,7 +258,7 @@ function tambah_nilai($data) {
     $idBaruRating = $huruf . sprintf("%08s", $urutan);
     
     
-    $tambahNilaiKecocokan = mysqli_query($koneksi, "INSERT INTO tb_rating_kecocokan (id_rating_kecocokan, id_siswa, rating_kecocokan_rata,rating_kecocokan_rangking,rating_kecocokan_sikap,rating_kecocokan_ekstrakurikuler,rating_kecocokan_prestasi) VALUES ('$idBaruRating', '$id_siswa','$nilai_bobot_rata_rata','$nilai_bobot_rangking','$nilai_bobot_sikap','$nilai_bobot_ekstrakurikuler', '$nilai_bobot_prestasi')");
+    $tambahNilaiKecocokan = mysqli_query($koneksi, "INSERT INTO tb_rating_kecocokan (id_rating_kecocokan,id_nilai ,id_siswa, rating_kecocokan_rata,rating_kecocokan_rangking,rating_kecocokan_sikap,rating_kecocokan_ekstrakurikuler,rating_kecocokan_prestasi) VALUES ('$idBaruRating', '$kodeBaruNilai' ,'$id_siswa','$nilai_bobot_rata_rata','$nilai_bobot_rangking','$nilai_bobot_sikap','$nilai_bobot_ekstrakurikuler', '$nilai_bobot_prestasi')");
 
     return mysqli_affected_rows($koneksi);
 }
