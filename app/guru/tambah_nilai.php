@@ -101,7 +101,7 @@ if(isset($_POST['simpan'])) {
                                         <label for="id_siswa">Siswa</label>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <select name="id_siswa" id="select2Single" class="select2-single form-control"
+                                        <select name="id_siswa" id="select2Single1" class="select2-single1 form-control"
                                             required>
                                             <?php
                                         $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY nama_siswa ASC");
@@ -136,8 +136,14 @@ if(isset($_POST['simpan'])) {
                                         <label for="nilai_sikap">Sikap</label>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
-                                        <input type="number" name="nilai_sikap" id="nilai_sikap" class="form-control"
-                                            placeholder="nilai sikap: xxxxx" required>
+                                        <select name="nilai_sikap" id="select2Single2"
+                                            class="select2-single2 form-control" required>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -145,17 +151,29 @@ if(isset($_POST['simpan'])) {
                                         <label for="nilai_ekstrakurikuler">Ekstrakurikuler</label>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
-                                        <input type="number" name="nilai_ekstrakurikuler" id="nilai_ekstrakurikuler"
-                                            class="form-control" placeholder="nilai ekstrakurikuler: xxxx" required>
+                                        <select name="nilai_ekstrakurikuler" id="select2Single3"
+                                            class="select2-single3 form-control" required>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-lg-2 col-md-2 col-12">
-                                        <label for="nilai_prestasi">Prestasi</label>
+                                        <label for="nilai_prestasi">Prestasi Akademik Dan Non Akademik</label>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12">
-                                        <input type="number" name="nilai_prestasi" id="nilai_prestasi"
-                                            class="form-control" placeholder="nilai prestasi: xxxxx" required>
+                                        <select name="nilai_prestasi" id="select2Single4"
+                                            class="select2-single4 form-control" required>
+                                            <option value="Sangat Banyak">Sangat Banyak</option>
+                                            <option value="Banyak">Banyak</option>
+                                            <option value="Cukup">Cukup</option>
+                                            <option value="Kurang">Kurang</option>
+                                            <option value="Tidak Ada">Tidak Ada</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="mt-5 row">
@@ -243,7 +261,10 @@ if(isset($_POST['simpan'])) {
     $(document).ready(function() {
 
 
-        $('.select2-single').select2();
+        $('.select2-single1').select2();
+        $('.select2-single2').select2();
+        $('.select2-single3').select2();
+        $('.select2-single4').select2();
 
         // Select2 Single  with Placeholder
         $('.select2-single-placeholder').select2({

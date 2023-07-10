@@ -95,4 +95,18 @@ function tambah_nilai($data) {
     $nilai_rangking = htmlspecialchars($data['nilai_rangking']);
     $nilai_sikap = htmlspecialchars($data['nilai_sikap']);
     $nilai_ekstrakurikuler = htmlspecialchars($data['nilai_ekstrakurikuler']);
+    $nilai_prestasi = htmlspecialchars($data['nilai_prestasi']);
+
+
+    $query = mysqli_query($koneksi, "SELECT max(id_nilai) as id_nilai FROM tb_nilai");
+    $data = mysqli_fetch_array($query);
+    $idBaru = $data['id_nilai'];    
+    $urutan = (int) substr($idBaru, 8, 8);    
+    $urutan++;    
+    $huruf = "NL". date('ymd');
+    $idBaru = $huruf . sprintf("%08s", $urutan);
+
+    $tambahNilai = mysqli_query($koneksi, "INSERT INTO tb_nilai (id_nilai, id_siswa, nilai_rata_rata,nilai_rangking,nilai_sikap,nilai_ekstrakurikuler,nilai_prestasi) VALUES ('$idBaru', '$id_siswa','$nilai_rata_rata','$nilai_rangking','$nilai_sikap','$nilai_ekstrakurikuler', '$nilai_prestasi')");
+
+    return mysqli_affected_rows($koneksi);
 }

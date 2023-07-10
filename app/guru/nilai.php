@@ -125,7 +125,7 @@ require "../controller/controller.php";
                                                 <td class="text-center"><?= $data['nilai_rangking'] ?></td>
                                                 <td class="text-center"><?= $data['nilai_sikap'] ?></td>
                                                 <td class="text-center"><?= $data['nilai_ekstrakurikuler'] ?></td>
-                                                <td class="text-center"><?= $data['nilai_ekstrakurikuler'] ?></td>
+                                                <td class="text-center"><?= $data['nilai_prestasi'] ?></td>
                                                 <td class="text-center">
                                                     <a href="edit_nilai.php?id_nilai=<?= $data['id_nilai'] ?>"
                                                         class="btn btn-warning">edit</a>
