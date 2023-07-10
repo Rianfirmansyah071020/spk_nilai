@@ -83,3 +83,16 @@ function edit_siswa($data, $id_siswa)
 
     return mysqli_affected_rows($koneksi);
 }
+
+
+// tambah nilai
+function tambah_nilai($data) {
+
+    global $koneksi;
+
+    $id_siswa = htmlspecialchars($data['id_siswa']);
+    $nilai_rata_rata = htmlspecialchars($data['nilai_rata_rata']);
+    $nilai_rangking = htmlspecialchars($data['nilai_rangking']);
+    $nilai_sikap = htmlspecialchars($data['nilai_sikap']);
+    $nilai_ekstrakurikuler = htmlspecialchars($data['nilai_ekstrakurikuler']);
+}

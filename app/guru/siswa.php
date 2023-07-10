@@ -128,7 +128,7 @@ require "../controller/controller.php";
 
                                             <?php
                                             $no = 1;
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY nama_siswa ASC");                                                                                    
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa ASC");                                                                                    
                                             ?>
 
                                             <?php 

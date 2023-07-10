@@ -117,11 +117,11 @@ if(isset($_POST['simpan'])) {
                             <form action="" method="post">
                                 <div class="row mt-3">
                                     <div class="col-lg-2 col-md-2 col-12">
-                                        <label for="nama_siswa">Nama</label>
+                                        <label for="nama_siswa">Nama Siswa</label>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-12">
-                                        <input type="text" name="nama_siswa" id="nama_siswa" class="form-control"
-                                            placeholder="nama: xxxxx" required>
+                                        <input type="text" name="nama_siswa" id="nama_siswa" autofocus
+                                            class="form-control" placeholder="nama: xxxxx" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
