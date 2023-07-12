@@ -65,21 +65,20 @@ require "../controller/controller.php";
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Data Nilai Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Data Hasil Nilai Siswa</h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data nilai siswa</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data hasil nilai siswa</li>
                         </ol>
                     </div>
 
                     <div class="row">
                         <!-- Datatables -->
-                        <a href="tambah_nilai.php" class="btn btn-success m-3">Tambah</a>
                         <div class="col-lg-12">
                             <div class="card mb-4 p-3">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Nilai Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Hasil Nilai Siswa</h6>
                                 </div>
                                 <div class="table-responsive p-3">
                                     <table class="table table-bordered align-items-center" id="dataTable"

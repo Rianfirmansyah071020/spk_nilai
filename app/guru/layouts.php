@@ -28,6 +28,12 @@
             <span>Rating Kecocokan</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="hasil.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Hasil</span>
+        </a>
+    </li>
     <hr class="sidebar-divider">
     <div class="version" id="version-ruangadmin"></div>
 </ul>
