@@ -61,10 +61,11 @@ if($_SESSION['login'] == true) {
                                             <button type="submit" name="login"
                                                 class="btn btn-primary w-100">Login</button>
                                         </div>
+                                        <div class="form-group mt-4">
+                                            <a href="../../index.php" class="btn btn-warning">kembali</a>
+                                        </div>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,6 +73,7 @@ if($_SESSION['login'] == true) {
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- Login Content -->
     <script src="../../vendor/jquery/jquery.min.js"></script>

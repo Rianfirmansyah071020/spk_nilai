@@ -10,8 +10,9 @@ session_start();
 require "../controller/controller.php";
 
 ?>
+
 <?php
-        include "layouts.php";
+        include "layouts_view.php";
         ?>
 <!-- Sidebar -->
 <div id="content-wrapper" class="d-flex flex-column">
@@ -26,15 +27,14 @@ require "../controller/controller.php";
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <span class="ml-2 d-none d-lg-inline text-white small"><?= $_SESSION['nama'] ?></span>
+                        <span class="ml-2 d-none d-lg-inline text-white small">kembali</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         aria-labelledby="userDropdown">
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
-                            data-target="#logoutModal">
+                        <a class="dropdown-item" href="../../index.php" data-toggle="modal" data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
+                            kembali
                         </a>
                     </div>
                 </li>
@@ -45,20 +45,15 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data Nilai Siswa</h1>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data nilai siswa</li>
-                </ol>
+                <h1 class="h3 mb-0 text-gray-800">Data Prestasi Siswa</h1>
             </div>
 
             <div class="row">
                 <!-- Datatables -->
-                <a href="tambah_nilai.php" class="btn btn-success m-3">Tambah</a>
                 <div class="col-lg-12">
                     <div class="card mb-4 p-3">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Nilai Siswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Prestasi Siswa</h6>
                         </div>
                         <div class="table-responsive p-3">
                             <table class="table table-bordered align-items-center" id="dataTable"
@@ -66,56 +61,84 @@ require "../controller/controller.php";
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center">No</th>
+                                        <th class="text-center">NISN</th>
                                         <th class="text-center">Nama</th>
-                                        <th class="text-center">Rata-Rata</th>
-                                        <th class="text-center">Rangking</th>
-                                        <th class="text-center">Sikap</th>
-                                        <th class="text-center">Ekstrakurikuler</th>
-                                        <th class="text-center">Prestasi</th>
-                                        <th class="text-center">_____Aksi_____</th>
+                                        <th class="text-center">Hasil</th>
+                                        <th class="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">No</th>
+                                        <th class="text-center">NISN</th>
                                         <th class="text-center">Nama</th>
-                                        <th class="text-center">Rata-Rata</th>
-                                        <th class="text-center">Rangking</th>
-                                        <th class="text-center">Sikap</th>
-                                        <th class="text-center">Ekstrakurikuler</th>
-                                        <th class="text-center">Prestasi</th>
-                                        <th class="text-center">_____Aksi_____</th>
+                                        <th class="text-center">Hasil</th>
+                                        <th class="text-center">Status</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
 
-                                    <?php
-                                            $no = 1;
-                                            $dataNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa ORDER BY id_nilai ASC");                                                                                    
-                                            ?>
+                                    <?php                                            
 
-                                    <?php 
-                                            foreach ($dataNilaiSiswa as $data) :
-                                            ?>
+
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa");
+
+                                            $arr = [];
+                                            $hasil = [];
+                                            $bobot = [0.25, 0.20, 0.15, 0.15, 0.25];
+
+                                            foreach ($dataSiswa as $key => $siswa) {
+
+                                                $id_siswa = $siswa['id_siswa'];
+                                                $ratingNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_rating_kecocokan INNER JOIN tb_siswa ON tb_rating_kecocokan.id_siswa = tb_siswa.id_siswa WHERE tb_rating_kecocokan.id_siswa='$id_siswa'");    
+                                                
+                                                $nilaiSiswa = mysqli_fetch_assoc($ratingNilaiSiswa);
+
+                                                foreach ([
+                                                    'rating_kecocokan_rata',
+                                                    'rating_kecocokan_rangking',
+                                                    'rating_kecocokan_sikap',
+                                                    'rating_kecocokan_ekstrakurikuler',
+                                                    'rating_kecocokan_prestasi'
+                                                ] as $i => $value) {
+                                                    $arr[$key][$i] = $nilaiSiswa[$value] * $bobot[$i];
+                                                }
+                                                
+                                                $hasil[$key] = $nilaiSiswa;
+
+                                                $arr[$key]['hasil'] = 0;
+                                                for ($i=0; $i < count($bobot); $i++) {
+                                                    $hasil[$key]['hasil'] = ($hasil[$key]['hasil'] ?? 0) + $arr[$key][$i];
+                                                }    
+                                            }
+
+                                            $jumlahSiswa = mysqli_num_rows($dataSiswa);
+
+                                            $i = 0;
+                                            $no = 1;
+
+                                            if($i < $jumlahSiswa) {
+
+                                                foreach ($hasil as $data) { ?>
                                     <tr>
                                         <td class="text-center"><?= $no++; ?></td>
+                                        <td class="text-start"><?= $data['nisn_siswa'] ?></td>
                                         <td class="text-start"><?= $data['nama_siswa'] ?></td>
-                                        <td class="text-center"><?= $data['nilai_rata_rata'] ?></td>
-                                        <td class="text-center"><?= $data['nilai_rangking'] ?></td>
-                                        <td class="text-center"><?= $data['nilai_sikap'] ?></td>
-                                        <td class="text-center"><?= $data['nilai_ekstrakurikuler'] ?></td>
-                                        <td class="text-center"><?= $data['nilai_prestasi'] ?></td>
+                                        <td class="text-center"><?= $data['hasil'] ?></td>
                                         <td class="text-center">
-                                            <a href="edit_nilai.php?id_nilai=<?= $data['id_nilai'] ?>"
-                                                class="btn btn-warning">edit</a>
-                                            <a href="hapus_nilai.php?id_nilai=<?= $data['id_nilai'] ?>"
-                                                class="btn btn-danger"
-                                                onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
+                                            <?php if ($data['hasil'] > 0.5) { ?>
+                                            prestasi
+                                            <?php } ?>
                                         </td>
                                     </tr>
 
-                                    <?php endforeach ?>
+                                    <?php  $i++;
+                                                }
+                                            }
 
+
+
+                                            ?>
 
                                 </tbody>
                             </table>
