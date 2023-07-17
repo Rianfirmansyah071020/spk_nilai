@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-error_reporting(0);
-
     if($_SESSION['login'] !== true) {
 
     header('location:../logout/index.php');
@@ -12,6 +10,7 @@ error_reporting(0);
 require "../controller/controller.php";
 
 ?>
+
 
 <?php
         include "layouts.php";
@@ -48,19 +47,20 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data Hasil Nilai Siswa</h1>
+                <h1 class="h3 mb-0 text-gray-800">Data Guru</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data hasil nilai siswa</li>
+                    <li class="breadcrumb-item active" aria-current="page">Data guru</li>
                 </ol>
             </div>
 
             <div class="row">
                 <!-- Datatables -->
+                <a href="tambah_guru.php" class="btn btn-success m-3">Tambah</a>
                 <div class="col-lg-12">
                     <div class="card mb-4 p-3">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Hasil Nilai Siswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data guru</h6>
                         </div>
                         <div class="table-responsive p-3">
                             <table class="table table-bordered align-items-center" id="dataTable"
@@ -68,10 +68,11 @@ require "../controller/controller.php";
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center">No</th>
-                                        <th class="text-center">NISN</th>
+                                        <th class="text-center">NIP</th>
                                         <th class="text-center">Nama</th>
-                                        <th class="text-center">Hasil</th>
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Username</th>
+                                        <th class="text-center">Password</th>
+                                        <th class="text-center">_____Aksi_____</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -79,73 +80,36 @@ require "../controller/controller.php";
                                         <th class="text-center">No</th>
                                         <th class="text-center">NISN</th>
                                         <th class="text-center">Nama</th>
-                                        <th class="text-center">Hasil</th>
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Username</th>
+                                        <th class="text-center">Password</th>
+                                        <th class="text-center">_____Aksi_____</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
 
-                                    <?php                                            
-
-
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa");
-
-                                            $arr = [];
-                                            $hasil = [];
-                                            $bobot = [0.25, 0.20, 0.15, 0.15, 0.25];
-
-                                            foreach ($dataSiswa as $key => $siswa) {
-
-                                                $id_siswa = $siswa['id_siswa'];
-                                                $ratingNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_rating_kecocokan INNER JOIN tb_siswa ON tb_rating_kecocokan.id_siswa = tb_siswa.id_siswa WHERE tb_rating_kecocokan.id_siswa='$id_siswa'");    
-                                                
-                                                $nilaiSiswa = mysqli_fetch_assoc($ratingNilaiSiswa);
-
-                                                foreach ([
-                                                    'rating_kecocokan_rata',
-                                                    'rating_kecocokan_rangking',
-                                                    'rating_kecocokan_sikap',
-                                                    'rating_kecocokan_ekstrakurikuler',
-                                                    'rating_kecocokan_prestasi'
-                                                ] as $i => $value) {
-                                                    $arr[$key][$i] = $nilaiSiswa[$value] * $bobot[$i];
-                                                }
-                                                
-                                                $hasil[$key] = $nilaiSiswa;
-
-                                                $arr[$key]['hasil'] = 0;
-                                                for ($i=0; $i < count($bobot); $i++) {
-                                                    $hasil[$key]['hasil'] = ($hasil[$key]['hasil'] ?? 0) + $arr[$key][$i];
-                                                }    
-                                            }
-
-                                            $jumlahSiswa = mysqli_num_rows($dataSiswa);
-
-                                            $i = 0;
+                                    <?php
                                             $no = 1;
+                                            $dataGuru = mysqli_query($koneksi, "SELECT * FROM tb_guru ORDER BY id_guru ASC");                                                                                    
+                                            ?>
 
-                                            if($i < $jumlahSiswa) {
-
-                                                foreach ($hasil as $data) { ?>
+                                    <?php 
+                                            foreach ($dataGuru as $data) :
+                                            ?>
                                     <tr>
                                         <td class="text-center"><?= $no++; ?></td>
-                                        <td class="text-start"><?= $data['nisn_siswa'] ?></td>
-                                        <td class="text-start"><?= $data['nama_siswa'] ?></td>
-                                        <td class="text-center"><?= $data['hasil'] ?></td>
+                                        <td class="text-center"><?= $data['nip_guru'] ?></td>
+                                        <td><?= $data['nama_guru'] ?></td>
+                                        <td><?= $data['username'] ?></td>
+                                        <td><?= $data['password'] ?></td>
                                         <td class="text-center">
-                                            <?php if ($data['hasil'] > 0.5) { ?>
-                                            prestasi
-                                            <?php } ?>
+                                            <a href="hapus_guru.php?id_guru=<?= $data['id_guru'] ?>"
+                                                class="btn btn-danger"
+                                                onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
                                         </td>
                                     </tr>
 
-                                    <?php  $i++;
-                                                }
-                                            }
+                                    <?php endforeach ?>
 
-
-
-                                            ?>
 
                                 </tbody>
                             </table>

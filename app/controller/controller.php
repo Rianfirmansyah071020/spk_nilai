@@ -453,3 +453,28 @@ function edit_nilai($data, $id_nilai) {
 
     return false;
 }
+
+
+
+function tambah_guru($data)  
+{
+    global $koneksi;
+
+    $nama_guru = htmlspecialchars($data['nama_guru']);
+    $nip_guru = htmlspecialchars($data['nip_guru']);
+    $username = htmlspecialchars($data['username']);
+    $password = htmlspecialchars($data['password']);
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = mysqli_query($koneksi, "SELECT max(id_guru) as id_guru FROM tb_guru");
+    $data = mysqli_fetch_array($query);
+    $idBaru = $data['id_guru'];    
+    $urutan = (int) substr($idBaru, 8, 8);    
+    $urutan++;    
+    $huruf = "GR". date('ymd');
+    $idBaru = $huruf . sprintf("%08s", $urutan);
+
+    $tambahguru = mysqli_query($koneksi, "INSERT INTO tb_guru (id_guru,nama_guru,nip_guru, username, password) VALUES ('$idBaru', '$nama_guru', '$nip_guru', '$username', '$password')");
+
+    return mysqli_affected_rows($koneksi);
+}

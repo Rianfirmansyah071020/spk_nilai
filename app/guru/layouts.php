@@ -12,6 +12,7 @@
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../../css/ruang-admin.min.css" rel="stylesheet">
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../vendor/select2/dist/css/select2.min.css">
 </head>
 
 <body id="page-top">
@@ -29,6 +30,12 @@
                 <a class="nav-link" href="siswa.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Siswa</span></a>
+            </li>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="guru.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Guru</span></a>
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
