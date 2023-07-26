@@ -92,45 +92,71 @@ if(isset($_POST['simpan'])) {
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_rata_rata">Rata-Rata</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" step="any" name="nilai_rata_rata" id="nilai_rata_rata"
-                                    class="form-control" placeholder="nilai rata-rata: xxxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_rata_rata" class="form-control" id="nilai_rata_rata" required>
+                                    <option value="91-100">91-100</option>
+                                    <option value="81-90">81-90</option>
+                                    <option value="71-80">71-80</option>
+                                    <option value="51-70">51-70</option>
+                                    <option value="0-50">0-50</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_rangking">Rangking</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_rangking" id="nilai_rangking" class="form-control"
-                                    placeholder="nilai rangking: xxxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_rangking" class="form-control" id="nilai_rangking" required>
+                                    <option value="Sangat Tinggi">Sangat Tinggi (1)</option>
+                                    <option value="Tinggi">Tinggi (2-4)</option>
+                                    <option value="Menengah">Menengah (5-7)</option>
+                                    <option value="Rendah">Rendah (8-10)</option>
+                                    <option value="Sangat Rendah">Sangat Rendah (>11)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_sikap">Sikap</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_sikap" id="nilai_sikap" class="form-control"
-                                    placeholder="nilai sikap: xxxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_sikap" class="form-control" id="nilai_sikap" required>
+                                    <option value="A">A (5)</option>
+                                    <option value="B">B (4)</option>
+                                    <option value="C">C (3)</option>
+                                    <option value="D">D (2)</option>
+                                    <option value="E">E (1)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_ekstrakurikuler">Ekstrakurikuler</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_ekstrakurikuler" id="nilai_ekstrakurikuler"
-                                    class="form-control" placeholder="nilai ekstrakurikuler: xxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_ekstrakurikuler" class="form-control" id="nilai_ekstrakurikuler"
+                                    required>
+                                    <option value="A">A (5)</option>
+                                    <option value="B">B (4)</option>
+                                    <option value="C">C (3)</option>
+                                    <option value="D">D (2)</option>
+                                    <option value="E">E (1)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_prestasi">Prestasi</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_prestasi" id="nilai_prestasi" class="form-control"
-                                    placeholder="nilai prestasi: xxxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_prestasi" class="form-control" id="nilai_prestasi" required>
+                                    <option value="Sangat banyak">Sangat banyak (>9)</option>
+                                    <option value="Banyak">Banyak (6-8)</option>
+                                    <option value="Cukup ">Cukup (3-5)</option>
+                                    <option value="Kurang">Kurang (1-2)</option>
+                                    <option value="Tidak ada">Tidak ada (0)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="mt-5 row">
