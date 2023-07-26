@@ -1,7 +1,7 @@
 <?php
 
 
-$koneksi = mysqli_connect('localhost', 'root', '', 'peringkat_siswa');
+$koneksi = mysqli_connect('localhost', 'root', '', 'siswa_prestasi');
 
 // login pengguna
 function login_pengguna($data)
@@ -11,21 +11,21 @@ function login_pengguna($data)
     $username = htmlspecialchars($data['username']);
     $password = htmlspecialchars($data['password']);    
 
-    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_guru WHERE username = '$username'"));
+    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'"));
 
     if($cekJumlahData === 1) {
 
         session_start();
-        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM tb_guru WHERE username = '$username'");
+        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'");
         $dataPenggunaArray = mysqli_fetch_array($dataPengguna);
 
         if(password_verify($password, $dataPenggunaArray['password'])){
 
             $_SESSION['username'] = $dataPenggunaArray['username'];
-            $_SESSION['nama'] = $dataPenggunaArray['nama_guru'];
+            $_SESSION['nama'] = $dataPenggunaArray['nama_admin'];
             $_SESSION['login'] = true;
 
-            header('location:../guru/siswa.php');
+            header('location:../admin/siswa.php');
             exit;
             
         }else {
@@ -456,25 +456,25 @@ function edit_nilai($data, $id_nilai) {
 
 
 
-function tambah_guru($data)  
+function tambah_admin($data)  
 {
     global $koneksi;
 
-    $nama_guru = htmlspecialchars($data['nama_guru']);
-    $nip_guru = htmlspecialchars($data['nip_guru']);
+    $nama_admin = htmlspecialchars($data['nama_admin']);
+    $nip_admin = htmlspecialchars($data['nip_admin']);
     $username = htmlspecialchars($data['username']);
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = mysqli_query($koneksi, "SELECT max(id_guru) as id_guru FROM tb_guru");
+    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM tb_admin");
     $data = mysqli_fetch_array($query);
-    $idBaru = $data['id_guru'];    
+    $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
     $urutan++;    
     $huruf = "GR". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahguru = mysqli_query($koneksi, "INSERT INTO tb_guru (id_guru,nama_guru,nip_guru, username, password) VALUES ('$idBaru', '$nama_guru', '$nip_guru', '$username', '$password')");
+    $tambahadmin = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,nama_admin,nip_admin, username, password) VALUES ('$idBaru', '$nama_admin', '$nip_admin', '$username', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }

@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 if($_SESSION['login'] == true) {
 
-    header('Location:../guru/siswa.php');
+    header('Location:../admin/siswa.php');
     exit;
 }
 
@@ -42,7 +42,9 @@ if($_SESSION['login'] == true) {
 
                                             if(isset($_POST['login'])) {
 
-                                                if(login_pengguna($_POST)) {                                                    
+                                                if(login_pengguna($_POST)) { 
+                                                    
+                                                    
                                                 }
                                             }
                                         ?>

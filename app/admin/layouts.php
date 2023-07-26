@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SMAN 13 Marangin</title>
+    <title>SMAN 13 Merangin</title>
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../../css/ruang-admin.min.css" rel="stylesheet">
@@ -33,9 +33,9 @@
             </li>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="guru.php">
+                <a class="nav-link" href="admin.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Guru</span></a>
+                    <span>Admin</span></a>
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">

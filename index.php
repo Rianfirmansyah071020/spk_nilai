@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>SMAN 13 Marangin</title>
+    <title>SMAN 13 Merangin</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets_home/img/sekolah.jpeg" />
     <!-- Bootstrap Icons-->
@@ -49,7 +49,7 @@
                     <hr class="divider" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 mb-5"> SMAN 13 Marangin</p>
+                    <p class="text-white-75 mb-5"> SMAN 13 Merangin</p>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
     </section>
     <footer class="bg-light py-5">
         <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">Copyright &copy; 2023 - SMAN 13 Marangin</div>
+            <div class="small text-center text-muted">Copyright &copy; 2023 - SMAN 13 Merangin</div>
         </div>
     </footer>
     <!-- Bootstrap core JS-->

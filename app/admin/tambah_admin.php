@@ -9,6 +9,22 @@ session_start();
 
 require "../controller/controller.php";
 
+if(isset($_POST['simpan'])) {
+    
+    if(tambah_admin($_POST) > 0) {
+
+        echo "<script>
+        alert('Data berhasil di tambahkan');
+        document.location.href='tambah_admin.php';
+        </script>";
+    }else {
+        echo "<script>
+        alert('Data gagal di tambahkan');
+        document.location.href='tambah_admin.php';
+        </script>";
+    }
+}
+
 ?>
 
 
@@ -47,74 +63,62 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data Guru</h1>
+                <h1 class="h3 mb-0 text-gray-800">Tambah Data admin</h1>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data guru</li>
+                    <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tambah Data admin</li>
                 </ol>
             </div>
 
             <div class="row">
-                <!-- Datatables -->
-                <a href="tambah_guru.php" class="btn btn-success m-3">Tambah</a>
-                <div class="col-lg-12">
-                    <div class="card mb-4 p-3">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data guru</h6>
+                <div class="card col-12 shadow p-4">
+                    <form action="" method="post">
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="nama_admin">Nama admin</label>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <input type="text" name="nama_admin" id="nama_admin" autofocus class="form-control"
+                                    placeholder="nama: xxxxx" required>
+                            </div>
                         </div>
-                        <div class="table-responsive p-3">
-                            <table class="table table-bordered align-items-center" id="dataTable"
-                                style="font-size:small;">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">NIP</th>
-                                        <th class="text-center">Nama</th>
-                                        <th class="text-center">Username</th>
-                                        <th class="text-center">Password</th>
-                                        <th class="text-center">_____Aksi_____</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">NISN</th>
-                                        <th class="text-center">Nama</th>
-                                        <th class="text-center">Username</th>
-                                        <th class="text-center">Password</th>
-                                        <th class="text-center">_____Aksi_____</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-
-                                    <?php
-                                            $no = 1;
-                                            $dataGuru = mysqli_query($koneksi, "SELECT * FROM tb_guru ORDER BY id_guru ASC");                                                                                    
-                                            ?>
-
-                                    <?php 
-                                            foreach ($dataGuru as $data) :
-                                            ?>
-                                    <tr>
-                                        <td class="text-center"><?= $no++; ?></td>
-                                        <td class="text-center"><?= $data['nip_guru'] ?></td>
-                                        <td><?= $data['nama_guru'] ?></td>
-                                        <td><?= $data['username'] ?></td>
-                                        <td><?= $data['password'] ?></td>
-                                        <td class="text-center">
-                                            <a href="hapus_guru.php?id_guru=<?= $data['id_guru'] ?>"
-                                                class="btn btn-danger"
-                                                onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
-                                        </td>
-                                    </tr>
-
-                                    <?php endforeach ?>
-
-
-                                </tbody>
-                            </table>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="nip_admin">NIP</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="nip_admin" id="nip_admin" class="form-control"
+                                    placeholder="nip: xxxxx" required>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="username" id="username" class="form-control"
+                                    placeholder="username: xxxxx" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="password" id="password" class="form-control"
+                                    placeholder="password: xxxxx" required>
+                            </div>
+                        </div>
+                        <div class="mt-5 row">
+                            <div>
+                                <button type="submit" name="simpan" class="btn btn-success m-3">simpan</button>
+                            </div>
+                            <div>
+                                <a href="admin.php" class="btn btn-warning m-3">kembali</a>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
             </div>
 
