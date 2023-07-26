@@ -89,7 +89,7 @@ require "../controller/controller.php";
 
                                     <?php
                                             $no = 1;
-                                            $dataadmin = mysqli_query($koneksi, "SELECT * FROM tb_admin ORDER BY id_admin ASC");                                                                                    
+                                            $dataadmin = mysqli_query($koneksi, "SELECT * FROM admin ORDER BY id_admin ASC");                                                                                    
                                             ?>
 
                                     <?php 
