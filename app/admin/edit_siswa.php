@@ -75,7 +75,7 @@ if(isset($_POST['simpan'])) {
                 </ol>
             </div>
 
-            <div class="row">
+            <div class="row p-4">
                 <div class="card col-12 shadow p-4">
                     <form action="" method="post">
                         <div class="row mt-3">
