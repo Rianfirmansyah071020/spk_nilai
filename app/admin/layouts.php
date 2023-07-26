@@ -18,7 +18,8 @@
 <body id="page-top">
     <div id="wrapper">
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+        <ul style="background-image: url(../../assets_home/img/bac2.jpg); background-size:cover;"
+            class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
                     <img src="../../assets_home/img/sekolah.jpeg">

@@ -18,7 +18,7 @@ require "../controller/controller.php";
         ?>
 <!-- Sidebar -->
 <div id="content-wrapper" class="d-flex flex-column">
-    <div id="content">
+    <div id="content" style="background-image: url(../../assets_home/img/bac5.jpg); background-size:cover;">
         <!-- TopBar -->
         <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
@@ -87,8 +87,9 @@ require "../controller/controller.php";
 
                                     <?php                                            
 
-
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN tb_nilai ON tb_siswa.id_siswa = tb_nilai.id_siswa ORDER BY tb_nilai.nilai_rata_rata DESC");
+                                            $bobotFirst = [0.25, 0.20, 0.15, 0.15, 0.25];
+                                            
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT tb_siswa.id_siswa,(tb_rating_kecocokan.rating_kecocokan_rata * $bobotFirst[0]  + tb_rating_kecocokan.rating_kecocokan_rangking * $bobotFirst[1] + tb_rating_kecocokan.rating_kecocokan_sikap * $bobotFirst[2] + tb_rating_kecocokan.rating_kecocokan_ekstrakurikuler * $bobotFirst[3] + tb_rating_kecocokan.rating_kecocokan_prestasi * $bobotFirst[4]) as 'total' FROM tb_siswa INNER JOIN tb_nilai ON tb_siswa.id_siswa = tb_nilai.id_siswa INNER JOIN tb_rating_kecocokan ON tb_siswa.id_siswa = tb_rating_kecocokan.id_siswa ORDER BY total DESC");
 
                                             $arr = [];
                                             $hasil = [];

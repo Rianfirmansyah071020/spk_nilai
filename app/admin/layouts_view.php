@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SMAN 13 Marangin</title>
+    <title>SMAN 13 Merangin</title>
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../../css/ruang-admin.min.css" rel="stylesheet">
@@ -17,7 +17,8 @@
 <body id="page-top">
     <div id="wrapper">
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar"
+            style="background-image: url(../../assets_home/img/bac2.jpg); background-size:cover;">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
                     <img src="../../assets_home/img/sekolah.jpeg">

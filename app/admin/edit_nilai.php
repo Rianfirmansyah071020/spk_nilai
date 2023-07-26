@@ -36,7 +36,7 @@ if(isset($_POST['simpan'])) {
         ?>
 <!-- Sidebar -->
 <div id="content-wrapper" class="d-flex flex-column">
-    <div id="content">
+    <div id="content" style="background-image: url(../../assets_home/img/bac5.jpg); background-size:cover;">
         <!-- TopBar -->
         <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
@@ -95,50 +95,122 @@ if(isset($_POST['simpan'])) {
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_rata_rata">Rata-Rata</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" step="any" value="<?= $dataNilaiById['nilai_rata_rata'] ?>"
-                                    name="nilai_rata_rata" id="nilai_rata_rata" class="form-control"
-                                    placeholder="nilai rata-rata: xxxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_rata_rata" class="form-control" id="nilai_rata_rata" required>
+                                    <option value="91-100"
+                                        <?php if($dataNilaiById['nilai_rata_rata'] === "91-100") echo "selected" ?>>
+                                        91-100</option>
+                                    <option value="81-90"
+                                        <?php if($dataNilaiById['nilai_rata_rata'] === "81-90") echo "selected" ?>>81-90
+                                    </option>
+                                    <option value="71-80"
+                                        <?php if($dataNilaiById['nilai_rata_rata'] === "71-80") echo "selected" ?>>71-80
+                                    </option>
+                                    <option value="51-70"
+                                        <?php if($dataNilaiById['nilai_rata_rata'] === "51-70") echo "selected" ?>>51-70
+                                    </option>
+                                    <option value="0-50"
+                                        <?php if($dataNilaiById['nilai_rata_rata'] === "0-50") echo "selected" ?>>0-50
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_rangking">Rangking</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_rangking" id="nilai_rangking"
-                                    value="<?= $dataNilaiById['nilai_rangking'] ?>" class="form-control"
-                                    placeholder="nilai rangking: xxxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_rangking" class="form-control" id="nilai_rangking" required>
+                                    <option value="Sangat Tinggi"
+                                        <?php if($dataNilaiById['nilai_rangking'] === "Sangat Tinggi") echo "selected" ?>>
+                                        Sangat Tinggi (1)</option>
+                                    <option value="Tinggi"
+                                        <?php if($dataNilaiById['nilai_rangking'] === "Tinggi") echo "selected" ?>>
+                                        Tinggi (2-4)</option>
+                                    <option value="Menengah"
+                                        <?php if($dataNilaiById['nilai_rangking'] === "Menengah") echo "selected" ?>>
+                                        Menengah (5-7)</option>
+                                    <option value="Rendah"
+                                        <?php if($dataNilaiById['nilai_rangking'] === "Rendah") echo "selected" ?>>
+                                        Rendah (8-10)</option>
+                                    <option value="Sangat Rendah"
+                                        <?php if($dataNilaiById['nilai_rangking'] === "Sangat Rendah") echo "selected" ?>>
+                                        Sangat Rendah (>11)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_sikap">Sikap</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_sikap" id="nilai_sikap"
-                                    value="<?= $dataNilaiById['nilai_sikap'] ?>" class="form-control"
-                                    placeholder="nilai sikap: xxxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_sikap" class="form-control" id="nilai_sikap" required>
+                                    <option value="A"
+                                        <?php if($dataNilaiById['nilai_sikap'] === "A") echo "selected" ?>>
+                                        A (5)</option>
+                                    <option value="B"
+                                        <?php if($dataNilaiById['nilai_sikap'] === "B") echo "selected" ?>>B (4)
+                                    </option>
+                                    <option value="C"
+                                        <?php if($dataNilaiById['nilai_sikap'] === "C") echo "selected" ?>>C (3)
+                                    </option>
+                                    <option value="D"
+                                        <?php if($dataNilaiById['nilai_sikap'] === "D") echo "selected" ?>>D (2)
+                                    </option>
+                                    <option value="E"
+                                        <?php if($dataNilaiById['nilai_sikap'] === "E") echo "selected" ?>>E (1)
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_ekstrakurikuler">Ekstrakurikuler</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_ekstrakurikuler" id="nilai_ekstrakurikuler"
-                                    class="form-control" value="<?= $dataNilaiById['nilai_ekstrakurikuler'] ?>"
-                                    placeholder="nilai ekstrakurikuler: xxxx" required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_ekstrakurikuler" class="form-control" id="nilai_ekstrakurikuler"
+                                    required>
+                                    <option value="A"
+                                        <?php if($dataNilaiById['nilai_ekstrakurikuler'] === "A") echo "selected" ?>>A
+                                        (5)
+                                    </option>
+                                    <option value="B"
+                                        <?php if($dataNilaiById['nilai_ekstrakurikuler'] === "B") echo "selected" ?>>B
+                                        (4)</option>
+                                    <option value="C"
+                                        <?php if($dataNilaiById['nilai_ekstrakurikuler'] === "C") echo "selected" ?>>C
+                                        (3)</option>
+                                    <option value="D"
+                                        <?php if($dataNilaiById['nilai_ekstrakurikuler'] === "D") echo "selected" ?>>D
+                                        (2)</option>
+                                    <option value="E"
+                                        <?php if($dataNilaiById['nilai_ekstrakurikuler'] === "E") echo "selected" ?>>E
+                                        (1)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
                                 <label for="nilai_prestasi">Prestasi</label>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <input type="number" name="nilai_prestasi" id="nilai_prestasi" class="form-control"
-                                    value="<?= $dataNilaiById['nilai_prestasi'] ?>" placeholder="nilai prestasi: xxxxx"
-                                    required>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <select name="nilai_prestasi" class="form-control" id="nilai_prestasi" required>
+                                    <option value="Sangat banyak"
+                                        <?php if($dataNilaiById['nilai_prestasi'] === "Sangat Banyak") echo "selected" ?>>
+                                        Sangat banyak (>9)</option>
+                                    <option value="Banyak"
+                                        <?php if($dataNilaiById['nilai_prestasi'] === "Banyak") echo "selected" ?>>
+                                        Banyak (6-8)</option>
+                                    <option value="Cukup"
+                                        <?php if($dataNilaiById['nilai_prestasi'] === "Cukup") echo "selected" ?>>
+                                        Cukup (3-5)</option>
+                                    <option value="Kurang"
+                                        <?php if($dataNilaiById['nilai_prestasi'] === "Kurang") echo "selected" ?>>
+                                        Kurang (1-2)</option>
+                                    <option value="Tidak ada"
+                                        <?php if($dataNilaiById['nilai_prestasi'] === "Tidak Ada") echo "selected" ?>>
+                                        Tidak ada (0)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="mt-5 row">

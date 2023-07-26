@@ -11,12 +11,12 @@ function login_pengguna($data)
     $username = htmlspecialchars($data['username']);
     $password = htmlspecialchars($data['password']);    
 
-    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_admin WHERE username = '$username'"));
+    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'"));
 
     if($cekJumlahData === 1) {
 
         session_start();
-        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM tb_admin WHERE username = '$username'");
+        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'");
         $dataPenggunaArray = mysqli_fetch_array($dataPengguna);
 
         if(password_verify($password, $dataPenggunaArray['password'])){
@@ -267,41 +267,31 @@ function edit_nilai($data, $id_nilai) {
     $nilai_rangking = htmlspecialchars($data['nilai_rangking']);
     $nilai_sikap = htmlspecialchars($data['nilai_sikap']);
     $nilai_ekstrakurikuler = htmlspecialchars($data['nilai_ekstrakurikuler']);
-    $nilai_prestasi = htmlspecialchars($data['nilai_prestasi']);
-
-
-    if($nilai_rata_rata > 100) {
-
-        echo "<script>
-        alert('Mohon perhatikan lagi nilai yang anda masukan, nilai maksimal 100');
-        document.location.href='';        
-        </script>";
-        return false;
-    }    
+    $nilai_prestasi = htmlspecialchars($data['nilai_prestasi']);   
 
     
     // proses nilai rata-rata
-    if($nilai_rata_rata >= 91 && $nilai_rata_rata <= 100){
+    if($nilai_rata_rata === "91-100"){
         
         $nilai_skala_rata_rata = 5;
         $nilai_bobot_rata_rata = 1;
     
-    }else if($nilai_rata_rata >= 81 && $nilai_rata_rata <= 90) {
+    }else if($nilai_rata_rata === "81-90") {
 
         $nilai_skala_rata_rata = 4;
         $nilai_bobot_rata_rata = 0.8;
     
-    }else if($nilai_rata_rata >= 71 && $nilai_rata_rata <= 80) {
+    }else if($nilai_rata_rata === "71-80") {
 
         $nilai_skala_rata_rata = 3;
         $nilai_bobot_rata_rata = 0.6;
     
-    }else if($nilai_rata_rata >= 51 && $nilai_rata_rata <= 70) {
+    }else if($nilai_rata_rata === "51-70") {
 
         $nilai_skala_rata_rata = 2;
         $nilai_bobot_rata_rata = 0.4;
     
-    }else if($nilai_rata_rata >= 0 && $nilai_rata_rata <= 50) {
+    }else if($nilai_rata_rata === "0-50") {
 
         $nilai_skala_rata_rata = 1;
         $nilai_bobot_rata_rata = 0.2;
@@ -311,74 +301,69 @@ function edit_nilai($data, $id_nilai) {
 
 
     // proses nilai rangking
-    if($nilai_rangking == 1){
+    if($nilai_rangking === "Sangat Tinggi"){
                 
-        $nilai_bobot_rangking = 1;
-        $rangking = 'Sangat Tinggi';
+        $nilai_bobot_rangking = 1;        
     
-    }else if($nilai_rangking >= 2 && $nilai_rangking <= 4) {
+    }else if($nilai_rangking === "Tinggi") {
         
-        $nilai_bobot_rangking = 0.8;
-        $rangking = 'Tinggi';
+        $nilai_bobot_rangking = 0.8;        
     
-    }else if($nilai_rangking >= 5 && $nilai_rangking <= 7) {
+    }else if($nilai_rangking === "Menengah") {
         
-        $nilai_bobot_rangking = 0.6;
-        $rangking = 'Menengah';
+        $nilai_bobot_rangking = 0.6;        
     
-    }else if($nilai_rangking >= 8 && $nilai_rangking <= 10) {
+    }else if($nilai_rangking === "Rendah") {
 
-        $nilai_bobot_rangking = 0.4;
-        $rangking = 'Rendah';
+        $nilai_bobot_rangking = 0.4;        
     
-    }else if($nilai_rangking >= 11 ) {
+    }else if($nilai_rangking === "Sangat Rendah" ) {
         
-        $nilai_bobot_rangking = 0.2;
-        $rangking = 'Sangat Rendah';
+        $nilai_bobot_rangking = 0.2;        
     }
 
 
 
     // proses nilai sikap
-    if($nilai_sikap == 5){
+    if($nilai_sikap === "A"){
                 
         $nilai_bobot_sikap = 1;        
     
-    }else if($nilai_sikap == 4) {
+    }else if($nilai_sikap === "B") {
         
         $nilai_bobot_sikap = 0.8;        
     
-    }else if($nilai_sikap == 3) {
+    }else if($nilai_sikap === "C") {
         
         $nilai_bobot_sikap = 0.6;        
     
-    }else if($nilai_sikap == 2) {
+    }else if($nilai_sikap === "D") {
 
         $nilai_bobot_sikap = 0.4;        
     
-    }else if($nilai_sikap <= 1 ) {
+    }else if($nilai_sikap === "E") {
         
         $nilai_bobot_sikap = 0.2;        
     }
 
 
-    if($nilai_ekstrakurikuler == 5){
+    if($nilai_ekstrakurikuler === "A"){
                 
         $nilai_bobot_ekstrakurikuler = 1;        
     
-    }else if($nilai_ekstrakurikuler == 4) {
+    }else if($nilai_ekstrakurikuler === "B") {
         
         $nilai_bobot_ekstrakurikuler = 0.8;        
     
-    }else if($nilai_ekstrakurikuler == 3) {
+    }else if($nilai_ekstrakurikuler === "C") {
         
         $nilai_bobot_ekstrakurikuler = 0.6;        
     
-    }else if($nilai_ekstrakurikuler == 2) {
+    }else if($nilai_ekstrakurikuler === "D") {
 
         $nilai_bobot_ekstrakurikuler = 0.4;        
     
-    }else if($nilai_ekstrakurikuler <= 1 ) {
+    }else if($nilai_ekstrakurikuler === "E" ) {
         
         $nilai_bobot_ekstrakurikuler = 0.2;        
     }
@@ -387,23 +372,23 @@ function edit_nilai($data, $id_nilai) {
 
 
     // proses nilai prestasi
-    if($nilai_prestasi >= 9){
+    if($nilai_prestasi === "Sangat banyak"){
                 
         $nilai_bobot_prestasi = 1;        
     
-    }else if($nilai_prestasi >= 6 && $nilai_prestasi <= 8) {
+    }else if($nilai_prestasi === "Banyak") {
         
         $nilai_bobot_prestasi = 0.75;        
     
-    }else if($nilai_prestasi >= 3 && $nilai_prestasi <= 5) {
+    }else if($nilai_prestasi === "Cukup") {
         
         $nilai_bobot_prestasi = 0.55;        
     
-    }else if($nilai_prestasi >= 1 && $nilai_prestasi <= 2) {
+    }else if($nilai_prestasi === "Kurang") {
 
         $nilai_bobot_prestasi = 0.35;        
     
-    }else if($nilai_prestasi <= 0 ) {
+    }else if($nilai_prestasi === "Tidak ada" ) {
         
         $nilai_bobot_prestasi = 0;        
     }

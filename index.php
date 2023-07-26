@@ -34,7 +34,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#visimisi">Visi Misi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="app/guru/hasil_view.php">Lihat Data Prestasi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="app/admin/hasil_view.php">Lihat Data Prestasi</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="app/login/index.php">Login</a></li>
                 </ul>
             </div>
