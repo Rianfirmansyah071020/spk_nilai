@@ -88,7 +88,7 @@ require "../controller/controller.php";
                                     <?php                                            
 
 
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa");
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN tb_nilai ON tb_siswa.id_siswa = tb_nilai.id_siswa ORDER BY tb_nilai.nilai_rata_rata DESC");
 
                                             $arr = [];
                                             $hasil = [];
@@ -133,7 +133,7 @@ require "../controller/controller.php";
                                         <td class="text-start"><?= $data['nama_siswa'] ?></td>
                                         <td class="text-center"><?= $data['hasil'] ?></td>
                                         <td class="text-center">
-                                            <?php if ($data['hasil'] > 0.5) { ?>
+                                            <?php if ($i < 5) { ?>
                                             prestasi
                                             <?php } ?>
                                         </td>
