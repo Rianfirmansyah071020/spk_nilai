@@ -37,7 +37,7 @@ require "../controller/controller.php";
                 <div class="col-lg-12">
                     <div class="card mb-4 p-3">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Prestasi Siswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Hasil Nilai Siswa</h6>
                         </div>
                         <div class="table-responsive p-3">
                             <table class="table table-bordered align-items-center" id="dataTable"
@@ -64,8 +64,9 @@ require "../controller/controller.php";
 
                                     <?php                                            
 
-
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa");
+                                            $bobotFirst = [0.25, 0.20, 0.15, 0.15, 0.25];
+                                            
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT tb_siswa.id_siswa,(tb_rating_kecocokan.rating_kecocokan_rata * $bobotFirst[0]  + tb_rating_kecocokan.rating_kecocokan_rangking * $bobotFirst[1] + tb_rating_kecocokan.rating_kecocokan_sikap * $bobotFirst[2] + tb_rating_kecocokan.rating_kecocokan_ekstrakurikuler * $bobotFirst[3] + tb_rating_kecocokan.rating_kecocokan_prestasi * $bobotFirst[4]) as 'total' FROM tb_siswa INNER JOIN tb_nilai ON tb_siswa.id_siswa = tb_nilai.id_siswa INNER JOIN tb_rating_kecocokan ON tb_siswa.id_siswa = tb_rating_kecocokan.id_siswa ORDER BY total DESC");
 
                                             $arr = [];
                                             $hasil = [];
@@ -110,9 +111,12 @@ require "../controller/controller.php";
                                         <td class="text-start"><?= $data['nama_siswa'] ?></td>
                                         <td class="text-center"><?= $data['hasil'] ?></td>
                                         <td class="text-center">
-                                            <?php if ($data['hasil'] > 0.5) { ?>
+                                            <?php if ($i < 5) { ?>
                                             prestasi
-                                            <?php } ?>
+                                            <?php }else { ?>
+
+                                            <?php echo "-";
+                                            } ?>
                                         </td>
                                     </tr>
 

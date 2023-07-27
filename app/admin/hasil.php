@@ -136,7 +136,10 @@ require "../controller/controller.php";
                                         <td class="text-center">
                                             <?php if ($i < 5) { ?>
                                             prestasi
-                                            <?php } ?>
+                                            <?php } else { ?>
+
+                                            <?php echo "-";
+                                            } ?>
                                         </td>
                                     </tr>
 
