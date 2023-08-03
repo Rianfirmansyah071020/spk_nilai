@@ -61,6 +61,11 @@ error_reporting(false);
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Guru</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="kelas.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Kelas</span></a>
+            </li>
             <?php endif ?>
 
             <?php if($_SESSION['akses'] === 'sistem_nilai' && $_SESSION['level'] === 'admin') : ?>

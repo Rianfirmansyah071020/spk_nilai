@@ -497,3 +497,24 @@ function tambah_kepsek($data)
 
     return mysqli_affected_rows($koneksi);
 }
+
+
+
+function tambah_kelas($data)  
+{
+    global $koneksi;
+
+    $nama_kelas = htmlspecialchars($data['nama_kelas']);    
+
+    $query = mysqli_query($koneksi, "SELECT max(id_kelas) as id_kelas FROM kelas");
+    $data = mysqli_fetch_array($query);
+    $idBaru = $data['id_kelas'];    
+    $urutan = (int) substr($idBaru, 8, 8);    
+    $urutan++;    
+    $huruf = "GR". date('ymd');
+    $idBaru = $huruf . sprintf("%08s", $urutan);
+
+    $tambahguru = mysqli_query($koneksi, "INSERT INTO kelas (id_kelas,nama_kelas) VALUES ('$idBaru', '$nama_kelas')");
+
+    return mysqli_affected_rows($koneksi);
+}
