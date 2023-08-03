@@ -56,6 +56,7 @@ function tambah_siswa($data)
 
     $nama_siswa = htmlspecialchars($data['nama_siswa']);
     $nisn_siswa = htmlspecialchars($data['nisn_siswa']);
+    $id_kelas = htmlspecialchars($data['id_kelas']);
 
     $query = mysqli_query($koneksi, "SELECT max(id_siswa) as id_siswa FROM tb_siswa");
     $data = mysqli_fetch_array($query);
@@ -65,7 +66,7 @@ function tambah_siswa($data)
     $huruf = "SW". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahSiswa = mysqli_query($koneksi, "INSERT INTO tb_siswa (id_siswa,nama_siswa,nisn_siswa) VALUES ('$idBaru', '$nama_siswa', '$nisn_siswa')");
+    $tambahSiswa = mysqli_query($koneksi, "INSERT INTO tb_siswa (id_siswa,id_kelas,nama_siswa,nisn_siswa) VALUES ('$idBaru', '$id_kelas','$nama_siswa', '$nisn_siswa')");
 
     return mysqli_affected_rows($koneksi);
 }
@@ -79,8 +80,9 @@ function edit_siswa($data, $id_siswa)
 
     $nama_siswa = htmlspecialchars($data['nama_siswa']);
     $nisn_siswa = htmlspecialchars($data['nisn_siswa']);
+    $id_kelas = htmlspecialchars($data['id_kelas']);
 
-    $editSiswa = mysqli_query($koneksi, "UPDATE tb_siswa SET nama_siswa='$nama_siswa', nisn_siswa='$nisn_siswa' WHERE id_siswa='$id_siswa'");
+    $editSiswa = mysqli_query($koneksi, "UPDATE tb_siswa SET nama_siswa='$nama_siswa',id_kelas='$id_kelas', nisn_siswa='$nisn_siswa' WHERE id_siswa='$id_siswa'");
 
     return mysqli_affected_rows($koneksi);
 }

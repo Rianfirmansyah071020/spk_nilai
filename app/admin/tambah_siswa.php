@@ -91,6 +91,22 @@ if(isset($_POST['simpan'])) {
                                     placeholder="nisn: xxxxx" required>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="id_kelas">Kelas</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <select name="id_kelas" id="select2Single" class="select2-single form-control" required>
+                                    <?php
+                                        $dataKelas = mysqli_query($koneksi, "SELECT * FROM kelas ORDER BY nama_kelas ASC");
+                                        foreach ($dataKelas as $kelas) : ?>
+                                    <option value="<?= $kelas['id_kelas'] ?>"><?= $kelas['nama_kelas'] ?>
+                                    </option>
+
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
                         <div class="mt-5 row">
                             <div>
                                 <button type="submit" name="simpan" class="btn btn-success m-3">simpan</button>
@@ -152,6 +168,7 @@ if(isset($_POST['simpan'])) {
 <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="../../js/ruang-admin.min.js"></script>
+<script src="../../vendor/select2/dist/js/select2.min.js"></script>
 <!-- Page level plugins -->
 <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -161,6 +178,104 @@ if(isset($_POST['simpan'])) {
 $(document).ready(function() {
     $('#dataTable').DataTable(); // ID From dataTable 
     $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+});
+</script>
+<script>
+$(document).ready(function() {
+
+
+    $('.select2-single').select2();
+
+    // Select2 Single  with Placeholder
+    $('.select2-single-placeholder').select2({
+        placeholder: "Select a Province",
+        allowClear: true
+    });
+
+    // Select2 Multiple
+    $('.select2-multiple').select2();
+
+    // Bootstrap Date Picker
+    $('#simple-date1 .input-group.date').datepicker({
+        format: 'dd/mm/yyyy',
+        todayBtn: 'linked',
+        todayHighlight: true,
+        autoclose: true,
+    });
+
+    $('#simple-date2 .input-group.date').datepicker({
+        startView: 1,
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true,
+        todayBtn: 'linked',
+    });
+
+    $('#simple-date3 .input-group.date').datepicker({
+        startView: 2,
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true,
+        todayBtn: 'linked',
+    });
+
+    $('#simple-date4 .input-daterange').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true,
+        todayBtn: 'linked',
+    });
+
+    // TouchSpin
+
+    $('#touchSpin1').TouchSpin({
+        min: 0,
+        max: 100,
+        boostat: 5,
+        maxboostedstep: 10,
+        initval: 0
+    });
+
+    $('#touchSpin2').TouchSpin({
+        min: 0,
+        max: 100,
+        decimals: 2,
+        step: 0.1,
+        postfix: '%',
+        initval: 0,
+        boostat: 5,
+        maxboostedstep: 10
+    });
+
+    $('#touchSpin3').TouchSpin({
+        min: 0,
+        max: 100,
+        initval: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        verticalbuttons: true,
+    });
+
+    $('#clockPicker1').clockpicker({
+        donetext: 'Done'
+    });
+
+    $('#clockPicker2').clockpicker({
+        autoclose: true
+    });
+
+    let input = $('#clockPicker3').clockpicker({
+        autoclose: true,
+        'default': 'now',
+        placement: 'top',
+        align: 'left',
+    });
+
+    $('#check-minutes').click(function(e) {
+        e.stopPropagation();
+        input.clockpicker('show').clockpicker('toggleView', 'minutes');
+    });
+
 });
 </script>
 </body>

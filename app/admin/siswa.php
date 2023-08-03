@@ -70,6 +70,7 @@ require "../controller/controller.php";
                                         <th class="text-center">No</th>
                                         <th class="text-center">NISN</th>
                                         <th class="text-center">Nama</th>
+                                        <th class="text-center">Kelas</th>
                                         <th class="text-center">_____Aksi_____</th>
                                     </tr>
                                 </thead>
@@ -78,6 +79,7 @@ require "../controller/controller.php";
                                         <th class="text-center">No</th>
                                         <th class="text-center">NISN</th>
                                         <th class="text-center">Nama</th>
+                                        <th class="text-center">Kelas</th>
                                         <th class="text-center">_____Aksi_____</th>
                                     </tr>
                                 </tfoot>
@@ -85,7 +87,7 @@ require "../controller/controller.php";
 
                                     <?php
                                             $no = 1;
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa ASC");                                                                                    
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN kelas ON tb_siswa.id_kelas=kelas.id_kelas ORDER BY id_siswa ASC");                                                                                    
                                             ?>
 
                                     <?php 
@@ -95,6 +97,7 @@ require "../controller/controller.php";
                                         <td class="text-center"><?= $no++; ?></td>
                                         <td class="text-center"><?= $data['nisn_siswa'] ?></td>
                                         <td><?= $data['nama_siswa'] ?></td>
+                                        <td><?= $data['nama_kelas'] ?></td>
                                         <td class="text-center">
                                             <a href="edit_siswa.php?id_siswa=<?= $data['id_siswa'] ?>"
                                                 class="btn btn-warning">edit</a>
