@@ -25,7 +25,7 @@ function login_pengguna($data)
             $_SESSION['nama'] = $dataPenggunaArray['nama_admin'];
             $_SESSION['login'] = true;
 
-            header('location:../admin/siswa.php');
+            header('location:../admin/dashboard.php');
             exit;
             
         }else {

@@ -146,11 +146,7 @@ require "../controller/controller.php";
                                     <?php  $i++;
                                                 }
                                             }
-
-
-
                                             ?>
-
                                 </tbody>
                             </table>
                         </div>

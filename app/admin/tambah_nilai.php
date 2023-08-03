@@ -64,7 +64,7 @@ if(isset($_POST['simpan'])) {
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Tambah Data Nilai Siswa</h1>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Tambah Data nilai siswa</li>
                 </ol>
             </div>
@@ -153,7 +153,7 @@ if(isset($_POST['simpan'])) {
                                 <select name="nilai_prestasi" class="form-control" id="nilai_prestasi" required>
                                     <option value="Sangat banyak">Sangat banyak (>9)</option>
                                     <option value="Banyak">Banyak (6-8)</option>
-                                    <option value="Cukup ">Cukup (3-5)</option>
+                                    <option value="Cukup">Cukup (3-5)</option>
                                     <option value="Kurang">Kurang (1-2)</option>
                                     <option value="Tidak ada">Tidak ada (0)</option>
                                 </select>
