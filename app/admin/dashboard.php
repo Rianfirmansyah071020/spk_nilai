@@ -55,9 +55,12 @@ require "../controller/controller.php";
             </div>
 
             <div class="row p-3 justify-content-center align-content-center">
+                <?php if($_SESSION['level'] === 'admin') : ?>
                 <div class="col-lg-4 col-12 card p-4 m-2">
+
                     <a href="session_admin.php" class="text-decoration-none">Menu Admin</a>
                 </div>
+                <?php endif ?>
                 <div class="col-lg-4 col-12 card p-4 m-2">
                     <a href="session_sistem_nilai.php" class="text-decoration-none">Sistem Nilai</a>
 

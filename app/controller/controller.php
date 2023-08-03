@@ -23,6 +23,7 @@ function login_pengguna($data)
 
             $_SESSION['username'] = $dataPenggunaArray['username'];
             $_SESSION['nama'] = $dataPenggunaArray['nama_admin'];
+            $_SESSION['level'] = $dataPenggunaArray['level_user'];
             $_SESSION['login'] = true;
 
             header('location:../admin/dashboard.php');
@@ -436,7 +437,7 @@ function tambah_admin($data)
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM tb_admin");
+    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM admin");
     $data = mysqli_fetch_array($query);
     $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
@@ -444,7 +445,7 @@ function tambah_admin($data)
     $huruf = "GR". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahadmin = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,lavel_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$username', '$password')");
+    $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$username', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }
@@ -460,7 +461,7 @@ function tambah_guru($data)
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM tb_admin");
+    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM admin");
     $data = mysqli_fetch_array($query);
     $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
@@ -468,7 +469,7 @@ function tambah_guru($data)
     $huruf = "GR". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahguru = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,lavel_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$username', '$password')");
+    $tambahguru = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$username', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }
@@ -484,7 +485,7 @@ function tambah_kepsek($data)
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM tb_admin");
+    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM admin");
     $data = mysqli_fetch_array($query);
     $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
@@ -492,7 +493,7 @@ function tambah_kepsek($data)
     $huruf = "GR". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahkepsek = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,lavel_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$username', '$password')");
+    $tambahkepsek = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$username', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }

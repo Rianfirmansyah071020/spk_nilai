@@ -3,7 +3,7 @@ require "../controller/controller.php";
 
 $id_admin = $_GET['id_admin'];
 
-$hapusadmin = mysqli_query($koneksi, "DELETE FROM tb_admin WHERE id_admin='$id_admin'");
+$hapusadmin = mysqli_query($koneksi, "DELETE FROM admin WHERE id_admin='$id_admin'");
 
 if(mysqli_affected_rows($koneksi)) {
 

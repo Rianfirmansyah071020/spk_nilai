@@ -36,7 +36,7 @@ error_reporting(false);
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <?php if($_SESSION['akses'] === 'menu_admin') : ?>
+            <?php if($_SESSION['akses'] === 'menu_admin' && $_SESSION['level'] === 'admin')  : ?>
 
             <li class="nav-item active">
                 <a class="nav-link" href="admin.php">
@@ -63,7 +63,7 @@ error_reporting(false);
             </li>
             <?php endif ?>
 
-            <?php if($_SESSION['akses'] === 'sistem_nilai') : ?>
+            <?php if($_SESSION['akses'] === 'sistem_nilai' && $_SESSION['level'] === 'admin') : ?>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Nilai
@@ -81,6 +81,39 @@ error_reporting(false);
                     <span>Rating Kecocokan</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="hasil.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Hasil</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <?php endif ?>
+
+
+
+            <?php if($_SESSION['akses'] === 'sistem_nilai' && $_SESSION['level'] === 'guru') : ?>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Nilai
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="hasil.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Hasil</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <?php endif ?>
+
+
+            <?php if($_SESSION['akses'] === 'sistem_nilai' && $_SESSION['level'] === 'kepsek') : ?>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Nilai
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="hasil.php">
                     <i class="fas fa-fw fa-chart-area"></i>

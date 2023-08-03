@@ -89,7 +89,7 @@ require "../controller/controller.php";
 
                                     <?php
                                             $no = 1;
-                                            $dataadmin = mysqli_query($koneksi, "SELECT * FROM admin ORDER BY id_admin ASC");                                                                                    
+                                            $dataadmin = mysqli_query($koneksi, "SELECT * FROM admin WHERE level_user='kepsek' ORDER BY id_admin ASC");                                                                                    
                                             ?>
 
                                     <?php 
@@ -102,7 +102,7 @@ require "../controller/controller.php";
                                         <td><?= $data['username'] ?></td>
                                         <td><?= $data['password'] ?></td>
                                         <td class="text-center">
-                                            <a href="hapus_admin.php?id_admin=<?= $data['id_admin'] ?>"
+                                            <a href="hapus_kepsek.php?id_kepsek=<?= $data['id_admin'] ?>"
                                                 class="btn btn-danger"
                                                 onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
                                         </td>

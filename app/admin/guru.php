@@ -78,7 +78,7 @@ require "../controller/controller.php";
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">No</th>
-                                        <th class="text-center">NISN</th>
+                                        <th class="text-center">NIP</th>
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Username</th>
                                         <th class="text-center">Password</th>
@@ -89,7 +89,7 @@ require "../controller/controller.php";
 
                                     <?php
                                             $no = 1;
-                                            $dataadmin = mysqli_query($koneksi, "SELECT * FROM admin ORDER BY id_admin ASC");                                                                                    
+                                            $dataadmin = mysqli_query($koneksi, "SELECT * FROM admin WHERE level_user='guru' ORDER BY id_admin ASC");                                                                                    
                                             ?>
 
                                     <?php 
@@ -102,7 +102,7 @@ require "../controller/controller.php";
                                         <td><?= $data['username'] ?></td>
                                         <td><?= $data['password'] ?></td>
                                         <td class="text-center">
-                                            <a href="hapus_admin.php?id_admin=<?= $data['id_admin'] ?>"
+                                            <a href="hapus_guru.php?id_guru=<?= $data['id_admin'] ?>"
                                                 class="btn btn-danger"
                                                 onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
                                         </td>
