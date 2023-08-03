@@ -1,3 +1,7 @@
+<?php
+
+error_reporting(false);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,17 +36,34 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <?php if($_SESSION['akses'] === 'menu_admin') : ?>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="admin.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Admin</span></a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="siswa.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Siswa</span></a>
             </li>
             <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="admin.php">
+                <a class="nav-link" href="kepsek.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Admin</span></a>
+                    <span>Kepala Sekolah</span></a>
             </li>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="guru.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Guru</span></a>
+            </li>
+            <?php endif ?>
+
+            <?php if($_SESSION['akses'] === 'sistem_nilai') : ?>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Nilai
@@ -67,5 +88,7 @@
                 </a>
             </li>
             <hr class="sidebar-divider">
+
+            <?php endif ?>
             <div class="version" id="version-ruangadmin"></div>
         </ul>

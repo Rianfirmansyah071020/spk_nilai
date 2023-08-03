@@ -47,20 +47,74 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 class="h3 mb-0 text-gray-800">Data guru</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    <li class="breadcrumb-item active" aria-current="page">Data guru</li>
                 </ol>
             </div>
 
-            <div class="row p-3 justify-content-center align-content-center">
-                <div class="col-lg-4 col-12 card p-4 m-2">
-                    <a href="session_admin.php" class="text-decoration-none">Menu Admin</a>
-                </div>
-                <div class="col-lg-4 col-12 card p-4 m-2">
-                    <a href="session_sistem_nilai.php" class="text-decoration-none">Sistem Nilai</a>
+            <div class="row">
+                <!-- Datatables -->
+                <a href="tambah_guru.php" class="btn btn-success m-3">Tambah</a>
+                <div class="col-lg-12">
+                    <div class="card mb-4 p-3">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Data guru</h6>
+                        </div>
+                        <div class="table-responsive p-3">
+                            <table class="table table-bordered align-items-center" id="dataTable"
+                                style="font-size:small;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">NIP</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="text-center">Username</th>
+                                        <th class="text-center">Password</th>
+                                        <th class="text-center">_____Aksi_____</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">NISN</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="text-center">Username</th>
+                                        <th class="text-center">Password</th>
+                                        <th class="text-center">_____Aksi_____</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
 
+                                    <?php
+                                            $no = 1;
+                                            $dataadmin = mysqli_query($koneksi, "SELECT * FROM admin ORDER BY id_admin ASC");                                                                                    
+                                            ?>
+
+                                    <?php 
+                                            foreach ($dataadmin as $data) :
+                                            ?>
+                                    <tr>
+                                        <td class="text-center"><?= $no++; ?></td>
+                                        <td class="text-center"><?= $data['nip_admin'] ?></td>
+                                        <td><?= $data['nama_admin'] ?></td>
+                                        <td><?= $data['username'] ?></td>
+                                        <td><?= $data['password'] ?></td>
+                                        <td class="text-center">
+                                            <a href="hapus_admin.php?id_admin=<?= $data['id_admin'] ?>"
+                                                class="btn btn-danger"
+                                                onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
+                                        </td>
+                                    </tr>
+
+                                    <?php endforeach ?>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 

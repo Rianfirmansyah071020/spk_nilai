@@ -9,6 +9,22 @@ session_start();
 
 require "../controller/controller.php";
 
+if(isset($_POST['simpan'])) {
+    
+    if(tambah_kepsek($_POST) > 0) {
+
+        echo "<script>
+        alert('Data berhasil di tambahkan');
+        document.location.href='tambah_kepsek.php';
+        </script>";
+    }else {
+        echo "<script>
+        alert('Data gagal di tambahkan');
+        document.location.href='tambah_kepsek.php';
+        </script>";
+    }
+}
+
 ?>
 
 
@@ -47,20 +63,62 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 class="h3 mb-0 text-gray-800">Tambah Data kepsek</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    <li class="breadcrumb-item active" aria-current="page">Tambah Data kepsek</li>
                 </ol>
             </div>
 
-            <div class="row p-3 justify-content-center align-content-center">
-                <div class="col-lg-4 col-12 card p-4 m-2">
-                    <a href="session_admin.php" class="text-decoration-none">Menu Admin</a>
-                </div>
-                <div class="col-lg-4 col-12 card p-4 m-2">
-                    <a href="session_sistem_nilai.php" class="text-decoration-none">Sistem Nilai</a>
+            <div class="row p-4">
+                <div class="card col-12 shadow p-4">
+                    <form action="" method="post">
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="nama_kepsek">Nama kepsek</label>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <input type="text" name="nama_kepsek" id="nama_kepsek" autofocus class="form-control"
+                                    placeholder="nama: xxxxx" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="nip_kepsek">NIP</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="nip_kepsek" id="nip_kepsek" class="form-control"
+                                    placeholder="nip: xxxxx" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="username" id="username" class="form-control"
+                                    placeholder="username: xxxxx" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="password" id="password" class="form-control"
+                                    placeholder="password: xxxxx" required>
+                            </div>
+                        </div>
+                        <div class="mt-5 row">
+                            <div>
+                                <button type="submit" name="simpan" class="btn btn-success m-3">simpan</button>
+                            </div>
+                            <div>
+                                <a href="kepsek.php" class="btn btn-warning m-3">kembali</a>
+                            </div>
 
+                        </div>
+                    </form>
                 </div>
             </div>
 

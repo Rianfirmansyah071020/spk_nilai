@@ -444,7 +444,55 @@ function tambah_admin($data)
     $huruf = "GR". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahadmin = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,nama_admin,nip_admin, username, password) VALUES ('$idBaru', '$nama_admin', '$nip_admin', '$username', '$password')");
+    $tambahadmin = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,lavel_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$username', '$password')");
+
+    return mysqli_affected_rows($koneksi);
+}
+
+
+function tambah_guru($data)  
+{
+    global $koneksi;
+
+    $nama_guru = htmlspecialchars($data['nama_guru']);
+    $nip_guru = htmlspecialchars($data['nip_guru']);
+    $username = htmlspecialchars($data['username']);
+    $password = htmlspecialchars($data['password']);
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM tb_admin");
+    $data = mysqli_fetch_array($query);
+    $idBaru = $data['id_admin'];    
+    $urutan = (int) substr($idBaru, 8, 8);    
+    $urutan++;    
+    $huruf = "GR". date('ymd');
+    $idBaru = $huruf . sprintf("%08s", $urutan);
+
+    $tambahguru = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,lavel_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$username', '$password')");
+
+    return mysqli_affected_rows($koneksi);
+}
+
+
+function tambah_kepsek($data)  
+{
+    global $koneksi;
+
+    $nama_kepsek = htmlspecialchars($data['nama_kepsek']);
+    $nip_kepsek = htmlspecialchars($data['nip_kepsek']);
+    $username = htmlspecialchars($data['username']);
+    $password = htmlspecialchars($data['password']);
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM tb_admin");
+    $data = mysqli_fetch_array($query);
+    $idBaru = $data['id_admin'];    
+    $urutan = (int) substr($idBaru, 8, 8);    
+    $urutan++;    
+    $huruf = "GR". date('ymd');
+    $idBaru = $huruf . sprintf("%08s", $urutan);
+
+    $tambahkepsek = mysqli_query($koneksi, "INSERT INTO tb_admin (id_admin,lavel_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$username', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }
