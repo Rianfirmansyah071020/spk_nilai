@@ -58,6 +58,11 @@ function tambah_siswa($data)
     $nisn_siswa = htmlspecialchars($data['nisn_siswa']);
     $id_kelas = htmlspecialchars($data['id_kelas']);
 
+    if($id_kelas == null) {
+
+        return false;
+    }
+
     $query = mysqli_query($koneksi, "SELECT max(id_siswa) as id_siswa FROM tb_siswa");
     $data = mysqli_fetch_array($query);
     $idBaru = $data['id_siswa'];    
