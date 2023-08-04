@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(false);
 
     if($_SESSION['login'] !== true) {
 
@@ -9,11 +8,9 @@ error_reporting(false);
     }
 
 require "../controller/controller.php";
-
 $id_kelas = $_SESSION['id_kelas'];
 $kelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id_kelas'");
-$kelasById = mysqli_fetch_array($kelasById);                    
-
+$kelasById = mysqli_fetch_array($kelasById);    
 
 ?>
 
@@ -53,78 +50,26 @@ $kelasById = mysqli_fetch_array($kelasById);
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data Rating Kecocokan <span
+                <h1 class="h3 mb-0 text-gray-800">PILIH KELAS <span
                         class="text-white"><?= $kelasById['nama_kelas'] ?></span></h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data rating kecocokan <span
-                            class="text-white"><?= $kelasById['nama_kelas'] ?></span></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                 </ol>
             </div>
 
-            <div class="row">
-                <!-- Datatables -->
-                <div class="col-lg-12">
-                    <div class="card mb-4 p-3">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Siswa <span
-                                    class="text-dark"><?= $kelasById['nama_kelas'] ?></span></h6>
-                        </div>
-                        <div class="table-responsive p-3">
-                            <table class="table table-bordered align-items-center" id="dataTable"
-                                style="font-size:small;">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">NISN</th>
-                                        <th class="text-center">Rata-Rata</th>
-                                        <th class="text-center">Rangking</th>
-                                        <th class="text-center">Sikap</th>
-                                        <th class="text-center">Ekstrakurikuler</th>
-                                        <th class="text-center">Prestasi</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">NISN</th>
-                                        <th class="text-center">Rata-Rata</th>
-                                        <th class="text-center">Rangking</th>
-                                        <th class="text-center">Sikap</th>
-                                        <th class="text-center">Ekstrakurikuler</th>
-                                        <th class="text-center">Prestasi</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
+            <div class="row p-3 justify-content-center align-content-center">
 
-                                    <?php
-                                            $no = 1;
-                                            $id_kelas = $_SESSION['id_kelas'];
-                                            $dataNilaiSiswa = mysqli_query($koneksi, "SELECT * FROM tb_rating_kecocokan INNER JOIN tb_siswa ON tb_rating_kecocokan.id_siswa = tb_siswa.id_siswa WHERE tb_siswa.id_kelas='$id_kelas' ORDER BY id_rating_kecocokan ASC ");                                                                                    
-                                            ?>
+                <?php 
+                    $datakelas = mysqli_query($koneksi, "SELECT * FROM kelas ORDER BY id_kelas ASC"); 
+                ?>
+                <?php foreach($datakelas as $kelas) : ?>
+                <div class="col-lg-4 col-12 card p-4 m-2">
 
-                                    <?php 
-                                            foreach ($dataNilaiSiswa as $data) :
-                                            ?>
-                                    <tr>
-                                        <td class="text-center"><?= $no++; ?></td>
-                                        <td class="text-center"><?= $data['nisn_siswa'] ?></td>
-                                        <td class="text-center"><?= $data['rating_kecocokan_rata'] ?></td>
-                                        <td class="text-center"><?= $data['rating_kecocokan_rangking'] ?></td>
-                                        <td class="text-center"><?= $data['rating_kecocokan_sikap'] ?></td>
-                                        <td class="text-center">
-                                            <?= $data['rating_kecocokan_ekstrakurikuler'] ?></td>
-                                        <td class="text-center"><?= $data['rating_kecocokan_prestasi'] ?></td>
-                                    </tr>
-
-                                    <?php endforeach ?>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <a href="session_kelas.php?id_kelas=<?= $kelas['id_kelas'] ?>"
+                        class="text-decoration-none"><?= $kelas['nama_kelas'] ?></a>
                 </div>
+                <?php endforeach ?>
             </div>
 
             <!-- Modal Logout -->

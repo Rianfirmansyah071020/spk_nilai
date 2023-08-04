@@ -64,7 +64,7 @@ error_reporting(false);
             <li class="nav-item active">
                 <a class="nav-link" href="kelas.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Kelas</span></a>
+                    <span>kelas</span></a>
             </li>
             <?php endif ?>
 
@@ -74,6 +74,12 @@ error_reporting(false);
                 Nilai
             </div>
 
+            <li class="nav-item">
+                <a class="nav-link" href="pilih_kelas.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Pilih Kelas</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="nilai.php">
                     <i class="fas fa-fw fa-chart-area"></i>

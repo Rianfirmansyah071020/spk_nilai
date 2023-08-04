@@ -11,6 +11,10 @@ error_reporting(0);
 
 require "../controller/controller.php";
 
+$id_kelas = $_SESSION['id_kelas'];
+$kelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id_kelas'");
+$kelasById = mysqli_fetch_array($kelasById);    
+
 ?>
 
 <?php
@@ -48,10 +52,12 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data Hasil Nilai Siswa</h1>
+                <h1 class="h3 mb-0 text-gray-800">Data Hasil Nilai Siswa <span
+                        class="text-white"><?= $kelasById['nama_kelas'] ?></span></h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="siswa.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data hasil nilai siswa</li>
+                    <li class="breadcrumb-item active" aria-current="page">Data hasil nilai siswa <span
+                            class="text-white"><?= $kelasById['nama_kelas'] ?></span></li>
                 </ol>
             </div>
 
@@ -60,7 +66,8 @@ require "../controller/controller.php";
                 <div class="col-lg-12">
                     <div class="card mb-4 p-3">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Hasil Nilai Siswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Hasil Nilai Siswa <span
+                                    class="text-dark"><?= $kelasById['nama_kelas'] ?></span></h6>
                         </div>
                         <div class="table-responsive p-3">
                             <table class="table table-bordered align-items-center" id="dataTable"
@@ -89,7 +96,7 @@ require "../controller/controller.php";
 
                                             $bobotFirst = [0.25, 0.20, 0.15, 0.15, 0.25];
                                             
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT tb_siswa.id_siswa,(tb_rating_kecocokan.rating_kecocokan_rata * $bobotFirst[0]  + tb_rating_kecocokan.rating_kecocokan_rangking * $bobotFirst[1] + tb_rating_kecocokan.rating_kecocokan_sikap * $bobotFirst[2] + tb_rating_kecocokan.rating_kecocokan_ekstrakurikuler * $bobotFirst[3] + tb_rating_kecocokan.rating_kecocokan_prestasi * $bobotFirst[4]) as 'total' FROM tb_siswa INNER JOIN tb_nilai ON tb_siswa.id_siswa = tb_nilai.id_siswa INNER JOIN tb_rating_kecocokan ON tb_siswa.id_siswa = tb_rating_kecocokan.id_siswa ORDER BY total DESC");
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT tb_siswa.id_siswa,(tb_rating_kecocokan.rating_kecocokan_rata * $bobotFirst[0]  + tb_rating_kecocokan.rating_kecocokan_rangking * $bobotFirst[1] + tb_rating_kecocokan.rating_kecocokan_sikap * $bobotFirst[2] + tb_rating_kecocokan.rating_kecocokan_ekstrakurikuler * $bobotFirst[3] + tb_rating_kecocokan.rating_kecocokan_prestasi * $bobotFirst[4]) as 'total' FROM tb_siswa INNER JOIN tb_nilai ON tb_siswa.id_siswa = tb_nilai.id_siswa INNER JOIN tb_rating_kecocokan ON tb_siswa.id_siswa = tb_rating_kecocokan.id_siswa WHERE tb_siswa.id_kelas='$id_kelas' ORDER BY total DESC");
 
                                             $arr = [];
                                             $hasil = [];

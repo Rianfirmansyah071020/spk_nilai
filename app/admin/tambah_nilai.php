@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(false);
 
     if($_SESSION['login'] !== true) {
 
