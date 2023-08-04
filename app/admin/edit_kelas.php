@@ -9,6 +9,27 @@ session_start();
 
 require "../controller/controller.php";
 
+$id_kelas = $_GET['id_kelas'];
+$dataKelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas = '$id_kelas'");
+$dataKelasById = mysqli_fetch_array($dataKelasById);
+
+
+if(isset($_POST['simpan'])) {
+    
+    if(edit_kelas($_POST, $id_kelas) > 0) {
+
+        echo "<script>
+        alert('Data berhasil di edit');
+        document.location.href='kelas.php';
+        </script>";
+    }else {
+        echo "<script>
+        alert('Data gagal di edit');
+        document.location.href='kelas.php';
+        </script>";
+    }
+}
+
 ?>
 
 
@@ -47,67 +68,35 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data kelas</h1>
+                <h1 class="h3 mb-0 text-gray-800">Edit Data kelas</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data kelas</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Data kelas</li>
                 </ol>
             </div>
 
-            <div class="row">
-                <!-- Datatables -->
-                <a href="tambah_kelas.php" class="btn btn-success m-3">Tambah</a>
-                <div class="col-lg-12">
-                    <div class="card mb-4 p-3">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data kelas</h6>
+            <div class="row p-4">
+                <div class="card col-12 shadow p-4">
+                    <form action="" method="post">
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <label for="nama_kelas">Nama kelas</label>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <input type="text" name="nama_kelas" id="nama_kelas" autofocus class="form-control"
+                                    placeholder="nama: xxxxx" required value="<?= $dataKelasById['nama_kelas'] ?>">
+                            </div>
                         </div>
-                        <div class="table-responsive p-3">
-                            <table class="table table-bordered align-items-center" id="dataTable"
-                                style="font-size:small;">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">Nama Kelas</th>
-                                        <th class="text-center">_____Aksi_____</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">Nama Kelas</th>
-                                        <th class="text-center">_____Aksi_____</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
+                        <div class="mt-5 row">
+                            <div>
+                                <button type="submit" name="simpan" class="btn btn-success m-3">simpan</button>
+                            </div>
+                            <div>
+                                <a href="kelas.php" class="btn btn-warning m-3">kembali</a>
+                            </div>
 
-                                    <?php
-                                            $no = 1;
-                                            $datakelas = mysqli_query($koneksi, "SELECT * FROM kelas ORDER BY id_kelas ASC");                                                                                    
-                                            ?>
-
-                                    <?php 
-                                            foreach ($datakelas as $data) :
-                                            ?>
-                                    <tr>
-                                        <td class="text-center"><?= $no++; ?></td>
-                                        <td><?= $data['nama_kelas'] ?></td>
-                                        <td class="text-center">
-                                            <a href="hapus_kelas.php?id_kelas=<?= $data['id_kelas'] ?>"
-                                                class="btn btn-danger"
-                                                onclick="return confirm('anda yakin menghapus data ini ?')">hapus</a>
-                                            <a href="edit_kelas.php?id_kelas=<?= $data['id_kelas'] ?>"
-                                                class="btn btn-warning">Edit</a>
-                                        </td>
-                                    </tr>
-
-                                    <?php endforeach ?>
-
-
-                                </tbody>
-                            </table>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 

@@ -87,6 +87,17 @@ function edit_siswa($data, $id_siswa)
     return mysqli_affected_rows($koneksi);
 }
 
+function edit_kelas($data, $id_kelas)  
+{
+    global $koneksi;
+
+    $nama_kelas = htmlspecialchars($data['nama_kelas']);        
+
+    $editKelas = mysqli_query($koneksi, "UPDATE kelas SET nama_kelas='$nama_kelas' WHERE id_kelas='$id_kelas'");
+
+    return mysqli_affected_rows($koneksi);
+}
+
 
 // tambah nilai
 function tambah_nilai($data) {
