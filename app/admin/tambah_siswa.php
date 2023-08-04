@@ -25,6 +25,8 @@ if(isset($_POST['simpan'])) {
     }
 }
 
+error_reporting(0);
+
 $id_kelas = $_SESSION['id_kelas'];
 $kelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id_kelas'");
 $kelasById = mysqli_fetch_array($kelasById);   

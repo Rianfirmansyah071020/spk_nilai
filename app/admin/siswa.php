@@ -9,6 +9,8 @@ session_start();
 
 require "../controller/controller.php";
 
+error_reporting(0);
+
 $id_kelas = $_SESSION['id_kelas'];
 $kelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id_kelas'");
 $kelasById = mysqli_fetch_array($kelasById);   
@@ -51,10 +53,12 @@ $kelasById = mysqli_fetch_array($kelasById);
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data Siswa <?= $kelasById['nama_kelas'] ?></h1>
+                <h1 class="h3 mb-0 text-gray-800">Data Siswa <span
+                        class="text-light"><?= $kelasById['nama_kelas'] ?></span></h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data siswa <?= $kelasById['nama_kelas'] ?>
+                    <li class="breadcrumb-item active" aria-current="page">Data siswa <span
+                            class="text-light"><?= $kelasById['nama_kelas'] ?></span>
                     </li>
                 </ol>
             </div>
@@ -65,7 +69,8 @@ $kelasById = mysqli_fetch_array($kelasById);
                 <div class="col-lg-12">
                     <div class="card mb-4 p-3">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Siswa <?= $kelasById['nama_kelas'] ?>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Siswa <span
+                                    class="text-dark"><?= $kelasById['nama_kelas'] ?></span>
                             </h6>
                         </div>
                         <div class="table-responsive p-3">

@@ -60,7 +60,7 @@ require "../controller/controller.php";
                     class="col-lg-4 col-12 card p-4 m-2 <?php if($_SESSION['akses'] == 'menu_admin'){ ?> bg-info  <?php } ?>">
 
                     <a href="session_admin.php"
-                        class="text-decoration-none <?php if($_SESSION['akses'] == 'menu_admin'){ ?> text-light  <?php } ?>">Menu
+                        class="text-decoration-none <?php if($_SESSION['akses'] == 'menu_admin'){ ?> text-light   <?php } ?>">Menu
                         Admin</a>
                 </div>
                 <?php endif ?>

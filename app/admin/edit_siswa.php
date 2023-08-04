@@ -7,6 +7,8 @@ session_start();
     exit;
     }
 
+    error_reporting(0);
+
 require "../controller/controller.php";
 
 $id_siswa = $_GET['id_siswa'];
