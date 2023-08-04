@@ -14,6 +14,10 @@ $id_siswa = $_GET['id_siswa'];
 $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa WHERE id_siswa='$id_siswa'");
 $dataSiswa = mysqli_fetch_array($dataSiswa);
 
+$id_kelas = $_SESSION['id_kelas'];
+$kelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id_kelas'");
+$kelasById = mysqli_fetch_array($kelasById);   
+
 if(isset($_POST['simpan'])) {
     
     if(edit_siswa($_POST, $id_siswa) > 0) {
@@ -101,7 +105,7 @@ if(isset($_POST['simpan'])) {
                                 <label for="id_kelas">Kelas</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <select name="id_kelas" id="select2Single" class="select2-single form-control" required>
+                                <!-- <select name="id_kelas" id="select2Single" class="select2-single form-control" required>
                                     <?php
                                         $dataKelas = mysqli_query($koneksi, "SELECT * FROM kelas ORDER BY nama_kelas ASC");
                                         foreach ($dataKelas as $kelas) : ?>
@@ -111,7 +115,9 @@ if(isset($_POST['simpan'])) {
                                     </option>
 
                                     <?php endforeach ?>
-                                </select>
+                                </select> -->
+                                <input type="hidden" name="id_kelas" value="<?= $id_kelas ?>">
+                                <p><?= $kelasById['nama_kelas'] ?></p>
                             </div>
                         </div>
                         <div class="mt-5 row">

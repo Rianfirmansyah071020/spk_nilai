@@ -25,6 +25,10 @@ if(isset($_POST['simpan'])) {
     }
 }
 
+$id_kelas = $_SESSION['id_kelas'];
+$kelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id_kelas'");
+$kelasById = mysqli_fetch_array($kelasById);   
+
 ?>
 
 
@@ -96,7 +100,8 @@ if(isset($_POST['simpan'])) {
                                 <label for="id_kelas">Kelas</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <select name="id_kelas" id="select2Single" class="select2-single form-control" required>
+                                <p><?= $kelasById['nama_kelas'] ?></p>
+                                <!-- <select name="id_kelas" id="select2Single" class="select2-single form-control" required>
                                     <?php
                                         $dataKelas = mysqli_query($koneksi, "SELECT * FROM kelas ORDER BY nama_kelas ASC");
                                         foreach ($dataKelas as $kelas) : ?>
@@ -104,7 +109,9 @@ if(isset($_POST['simpan'])) {
                                     </option>
 
                                     <?php endforeach ?>
-                                </select>
+                                </select> -->
+
+                                <input type="hidden" name="id_kelas" value=<?= $_SESSION['id_kelas'] ?>>
                             </div>
                         </div>
                         <div class="mt-5 row">

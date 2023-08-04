@@ -9,6 +9,10 @@ session_start();
 
 require "../controller/controller.php";
 
+$id_kelas = $_SESSION['id_kelas'];
+$kelasById = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id_kelas'");
+$kelasById = mysqli_fetch_array($kelasById);   
+
 ?>
 
 
@@ -47,10 +51,11 @@ require "../controller/controller.php";
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Data Siswa</h1>
+                <h1 class="h3 mb-0 text-gray-800">Data Siswa <?= $kelasById['nama_kelas'] ?></h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data siswa</li>
+                    <li class="breadcrumb-item active" aria-current="page">Data siswa <?= $kelasById['nama_kelas'] ?>
+                    </li>
                 </ol>
             </div>
 
@@ -60,7 +65,8 @@ require "../controller/controller.php";
                 <div class="col-lg-12">
                     <div class="card mb-4 p-3">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Siswa <?= $kelasById['nama_kelas'] ?>
+                            </h6>
                         </div>
                         <div class="table-responsive p-3">
                             <table class="table table-bordered align-items-center" id="dataTable"
@@ -87,7 +93,7 @@ require "../controller/controller.php";
 
                                     <?php
                                             $no = 1;
-                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN kelas ON tb_siswa.id_kelas=kelas.id_kelas ORDER BY id_siswa ASC");                                                                                    
+                                            $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN kelas ON tb_siswa.id_kelas=kelas.id_kelas WHERE kelas.id_kelas='$id_kelas' ORDER BY id_siswa ASC");                                                                                    
                                             ?>
 
                                     <?php 
