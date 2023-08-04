@@ -3,6 +3,15 @@
 
 $koneksi = mysqli_connect('localhost', 'root', '', 'siswa_prestasi');
 
+// mailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+//ini sesuaikan foldernya ke file 3 ini
+require '../admin/PHPMailer/src/Exception.php';
+require '../admin/PHPMailer/src/PHPMailer.php';
+require '../admin/PHPMailer/src/SMTP.php';
+
 // login pengguna
 function login_pengguna($data)
 {
@@ -445,7 +454,7 @@ function edit_nilai($data, $id_nilai) {
 
 
 
-function tambah_admin($data)  
+function tambah_admin($data)
 {
     global $koneksi;
 
@@ -455,17 +464,52 @@ function tambah_admin($data)
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM admin");
-    $data = mysqli_fetch_array($query);
-    $idBaru = $data['id_admin'];    
-    $urutan = (int) substr($idBaru, 8, 8);    
-    $urutan++;    
-    $huruf = "ADM". date('ymd');
-    $idBaru = $huruf . sprintf("%08s", $urutan);
+    // kirim mailer
+    $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
+    $pesan = 'Selamat bergabung ' . $data["nama_admin"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login email : ' . $data["email"] .' password : ' . $data["password"];
 
-    $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$email', '$password')");
+        try {
+            $mail = new PHPMailer(true);
+        //Server settings
+        // $mail->SMTPDebug = 2; //Enable verbose debug output
+        $mail->isSMTP(); //Send using SMTP
+        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->SMTPSecure = 'ssl'; //Enable implicit TLS encryption
+        $mail->SMTPAuth = true; //Enable SMTP authentication
+        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Username = 'smanmerangin73@gmail.com'; //SMTP username
+        $mail->Password = 'ttpmuvddjqplkoyn'; //SMTP password
 
-    return mysqli_affected_rows($koneksi);
+        //pengirim
+        $mail->setFrom('smanmerangin73@gmail.com', 'SMAN 13 Merangin');
+        $mail->addAddress($email); //Add a recipient
+
+        //Content
+        $mail->isHTML(true); //Set email format to HTML
+        $mail->Subject = $judul;
+        $mail->Body = $pesan;
+        $mail->AltBody = '';
+        //$mail->AddEmbeddedImage('gambar/logo.png', 'logo'); //abaikan jika tidak ada logo
+        //$mail->addAttachment(''); 
+
+        $mail->send();
+
+
+        $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM admin");
+        $data = mysqli_fetch_array($query);
+        $idBaru = $data['id_admin'];
+        $urutan = (int) substr($idBaru, 8, 8);
+        $urutan++;
+        $huruf = "ADM" . date('ymd');
+        $idBaru = $huruf . sprintf("%08s", $urutan);
+
+        $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$email', '$password')");
+
+        return mysqli_affected_rows($koneksi);
+        } catch (\Throwable $th) {
+            
+            return false;
+        }   
 }
 
 
@@ -479,17 +523,52 @@ function tambah_guru($data)
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
+    $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
+    $pesan = 'Selamat bergabung ' . $data["nama_guru"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login email : ' . $data["email"] .' password : ' . $data["password"];
+
+    
+    try {
+        $mail = new PHPMailer(true);
+        //Server settings
+        // $mail->SMTPDebug = 2; //Enable verbose debug output
+        $mail->isSMTP(); //Send using SMTP
+        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->SMTPSecure = 'ssl'; //Enable implicit TLS encryption
+        $mail->SMTPAuth = true; //Enable SMTP authentication
+        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+         $mail->Username = 'smanmerangin73@gmail.com'; //SMTP username
+        $mail->Password = 'ttpmuvddjqplkoyn'; //SMTP password
+
+        //pengirim
+        $mail->setFrom('smanmerangin73@gmail.com', 'SMAN 13 Merangin');
+        $mail->addAddress($email); //Add a recipient
+        $mail->addAddress($email); //Add a recipient
+
+        //Content
+        $mail->isHTML(true); //Set email format to HTML
+        $mail->Subject = $judul;
+        $mail->Body = $pesan;
+        $mail->AltBody = '';
+        //$mail->AddEmbeddedImage('gambar/logo.png', 'logo'); //abaikan jika tidak ada logo
+        //$mail->addAttachment(''); 
+
+        $mail->send();
+
     $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM admin");
     $data = mysqli_fetch_array($query);
     $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
     $urutan++;    
-    $huruf = "GR". date('ymd');
+    $huruf = "ADM". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
     $tambahguru = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$email', '$password')");
 
     return mysqli_affected_rows($koneksi);
+    } catch (\Throwable $th) {
+        
+        return false;
+    }        
 }
 
 
@@ -503,17 +582,53 @@ function tambah_kepsek($data)
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
+    $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
+    $pesan = 'Selamat bergabung ' . $data["nama_kepsek"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login email : ' . $data["email"] .' password : ' . $data["password"];
+
+    
+    
+        try {
+            $mail = new PHPMailer(true);
+        //Server settings
+        // $mail->SMTPDebug = 2; //Enable verbose debug output
+        $mail->isSMTP(); //Send using SMTP
+        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->SMTPSecure = 'ssl'; //Enable implicit TLS encryption
+        $mail->SMTPAuth = true; //Enable SMTP authentication
+        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+         $mail->Username = 'smanmerangin73@gmail.com'; //SMTP username
+        $mail->Password = 'ttpmuvddjqplkoyn'; //SMTP password
+
+        //pengirim
+        $mail->setFrom('smanmerangin73@gmail.com', 'SMAN 13 Merangin');
+        $mail->addAddress($email); //Add a recipient
+        $mail->addAddress($email); //Add a recipient
+
+        //Content
+        $mail->isHTML(true); //Set email format to HTML
+        $mail->Subject = $judul;
+        $mail->Body = $pesan;
+        $mail->AltBody = '';
+        //$mail->AddEmbeddedImage('gambar/logo.png', 'logo'); //abaikan jika tidak ada logo
+        //$mail->addAttachment(''); 
+
+        $mail->send();
+
     $query = mysqli_query($koneksi, "SELECT max(id_admin) as id_admin FROM admin");
     $data = mysqli_fetch_array($query);
     $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
     $urutan++;    
-    $huruf = "KPS". date('ymd');
+    $huruf = "ADM". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
     $tambahkepsek = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$email', '$password')");
 
     return mysqli_affected_rows($koneksi);
+        } catch (\Throwable $th) {
+
+        return false;
+        }
 }
 
 

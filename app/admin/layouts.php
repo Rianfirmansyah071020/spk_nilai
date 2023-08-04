@@ -49,12 +49,6 @@ error_reporting(0);
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Admin</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="siswa.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Siswa</span></a>
-            </li>
-            <hr class="sidebar-divider my-0">
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
                 <a class="nav-link" href="kepsek.php">
@@ -67,6 +61,13 @@ error_reporting(0);
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Guru</span></a>
             </li>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="siswa.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Siswa</span></a>
+            </li>
+            <hr class="sidebar-divider my-0">
             <li class="nav-item active">
                 <a class="nav-link" href="kelas.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
