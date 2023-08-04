@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+error_reporting(0);
+
     if($_SESSION['login'] !== true) {
 
     header('location:../logout/index.php');

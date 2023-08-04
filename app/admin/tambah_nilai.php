@@ -80,7 +80,8 @@ if(isset($_POST['simpan'])) {
                             <div class="col-lg-6 col-md-6 col-12">
                                 <select name="id_siswa" id="select2Single" class="select2-single form-control" required>
                                     <?php
-                                        $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa ASC");
+                                    $id_kelas = $_SESSION['id_kelas'];
+                                        $dataSiswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN kelas ON tb_siswa.id_kelas = kelas.id_kelas WHERE tb_siswa.id_kelas='$id_kelas' ORDER BY id_siswa ASC");
                                         foreach ($dataSiswa as $siswa) : ?>
                                     <option value="<?= $siswa['id_siswa'] ?>"><?= $siswa['nama_siswa'] ?>
                                     </option>

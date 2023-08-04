@@ -68,6 +68,8 @@ $kelasById = mysqli_fetch_array($kelasById);
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Data Hasil Nilai Siswa <span
                                     class="text-dark"><?= $kelasById['nama_kelas'] ?></span></h6>
+                            <a href="export_pdf.php?id_kelas=<?= $id_kelas ?>" target="_blank"
+                                class="btn btn-success">Export PDF</a>
                         </div>
                         <div class="table-responsive p-3">
                             <table class="table table-bordered align-items-center" id="dataTable"

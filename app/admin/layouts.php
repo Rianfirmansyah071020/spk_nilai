@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(false);
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +35,12 @@ error_reporting(false);
                 <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pilih_kelas.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Pilih Kelas</span>
+                </a>
             </li>
             <?php if($_SESSION['akses'] === 'menu_admin' && $_SESSION['level'] === 'admin')  : ?>
 
@@ -73,13 +79,6 @@ error_reporting(false);
             <div class="sidebar-heading">
                 Nilai
             </div>
-
-            <li class="nav-item">
-                <a class="nav-link" href="pilih_kelas.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Pilih Kelas</span>
-                </a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="nilai.php">
                     <i class="fas fa-fw fa-chart-area"></i>

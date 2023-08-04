@@ -444,7 +444,7 @@ function tambah_admin($data)
     $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
     $urutan++;    
-    $huruf = "GR". date('ymd');
+    $huruf = "ADM". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
     $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$username', '$password')");
@@ -492,7 +492,7 @@ function tambah_kepsek($data)
     $idBaru = $data['id_admin'];    
     $urutan = (int) substr($idBaru, 8, 8);    
     $urutan++;    
-    $huruf = "GR". date('ymd');
+    $huruf = "KPS". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
     $tambahkepsek = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$username', '$password')");
@@ -513,7 +513,7 @@ function tambah_kelas($data)
     $idBaru = $data['id_kelas'];    
     $urutan = (int) substr($idBaru, 8, 8);    
     $urutan++;    
-    $huruf = "GR". date('ymd');
+    $huruf = "KLS". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
     $tambahguru = mysqli_query($koneksi, "INSERT INTO kelas (id_kelas,nama_kelas) VALUES ('$idBaru', '$nama_kelas')");
