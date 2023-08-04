@@ -66,10 +66,11 @@ $kelasById = mysqli_fetch_array($kelasById);
                     $datakelas = mysqli_query($koneksi, "SELECT * FROM kelas ORDER BY id_kelas ASC"); 
                 ?>
                 <?php foreach($datakelas as $kelas) : ?>
-                <div class="col-lg-4 col-12 card p-4 m-2">
+                <div
+                    class="col-lg-4 col-12 card p-4 m-2 <?php if($_SESSION['id_kelas'] == $kelas['id_kelas']){ ?> bg-info  <?php } ?>">
 
                     <a href="session_kelas.php?id_kelas=<?= $kelas['id_kelas'] ?>"
-                        class="text-decoration-none"><?= $kelas['nama_kelas'] ?></a>
+                        class="text-decoration-none <?php if($_SESSION['id_kelas'] == $kelas['id_kelas']){ ?> text-light  <?php } ?>"><?= $kelas['nama_kelas'] ?></a>
                 </div>
                 <?php endforeach ?>
             </div>

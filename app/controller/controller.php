@@ -8,20 +8,20 @@ function login_pengguna($data)
 {
     global $koneksi;
 
-    $username = htmlspecialchars($data['username']);
+    $email = htmlspecialchars($data['email']);
     $password = htmlspecialchars($data['password']);    
 
-    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'"));
+    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM admin WHERE email = '$email'"));
 
     if($cekJumlahData === 1) {
 
         session_start();
-        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'");
+        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM admin WHERE email = '$email'");
         $dataPenggunaArray = mysqli_fetch_array($dataPengguna);
 
         if(password_verify($password, $dataPenggunaArray['password'])){
 
-            $_SESSION['username'] = $dataPenggunaArray['username'];
+            $_SESSION['email'] = $dataPenggunaArray['email'];
             $_SESSION['nama'] = $dataPenggunaArray['nama_admin'];
             $_SESSION['level'] = $dataPenggunaArray['level_user'];
             $_SESSION['login'] = true;
@@ -435,7 +435,7 @@ function tambah_admin($data)
 
     $nama_admin = htmlspecialchars($data['nama_admin']);
     $nip_admin = htmlspecialchars($data['nip_admin']);
-    $username = htmlspecialchars($data['username']);
+    $email = htmlspecialchars($data['email']);
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -447,7 +447,7 @@ function tambah_admin($data)
     $huruf = "ADM". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$username', '$password')");
+    $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$email', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }
@@ -459,7 +459,7 @@ function tambah_guru($data)
 
     $nama_guru = htmlspecialchars($data['nama_guru']);
     $nip_guru = htmlspecialchars($data['nip_guru']);
-    $username = htmlspecialchars($data['username']);
+    $email = htmlspecialchars($data['email']);
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -471,7 +471,7 @@ function tambah_guru($data)
     $huruf = "GR". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahguru = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$username', '$password')");
+    $tambahguru = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$email', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }
@@ -483,7 +483,7 @@ function tambah_kepsek($data)
 
     $nama_kepsek = htmlspecialchars($data['nama_kepsek']);
     $nip_kepsek = htmlspecialchars($data['nip_kepsek']);
-    $username = htmlspecialchars($data['username']);
+    $email = htmlspecialchars($data['email']);
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -495,7 +495,7 @@ function tambah_kepsek($data)
     $huruf = "KPS". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahkepsek = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, username, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$username', '$password')");
+    $tambahkepsek = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$email', '$password')");
 
     return mysqli_affected_rows($koneksi);
 }

@@ -70,7 +70,7 @@ require "../controller/controller.php";
                                         <th class="text-center">No</th>
                                         <th class="text-center">NIP</th>
                                         <th class="text-center">Nama</th>
-                                        <th class="text-center">Username</th>
+                                        <th class="text-center">Email</th>
                                         <th class="text-center">Password</th>
                                         <th class="text-center">_____Aksi_____</th>
                                     </tr>
@@ -80,7 +80,7 @@ require "../controller/controller.php";
                                         <th class="text-center">No</th>
                                         <th class="text-center">NISN</th>
                                         <th class="text-center">Nama</th>
-                                        <th class="text-center">Username</th>
+                                        <th class="text-center">Email</th>
                                         <th class="text-center">Password</th>
                                         <th class="text-center">_____Aksi_____</th>
                                     </tr>
@@ -99,7 +99,7 @@ require "../controller/controller.php";
                                         <td class="text-center"><?= $no++; ?></td>
                                         <td class="text-center"><?= $data['nip_admin'] ?></td>
                                         <td><?= $data['nama_admin'] ?></td>
-                                        <td><?= $data['username'] ?></td>
+                                        <td><?= $data['email'] ?></td>
                                         <td><?= $data['password'] ?></td>
                                         <td class="text-center">
                                             <a href="hapus_kepsek.php?id_kepsek=<?= $data['id_admin'] ?>"

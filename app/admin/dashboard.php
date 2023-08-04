@@ -56,13 +56,19 @@ require "../controller/controller.php";
 
             <div class="row p-3 justify-content-center align-content-center">
                 <?php if($_SESSION['level'] === 'admin') : ?>
-                <div class="col-lg-4 col-12 card p-4 m-2">
+                <div
+                    class="col-lg-4 col-12 card p-4 m-2 <?php if($_SESSION['akses'] == 'menu_admin'){ ?> bg-info  <?php } ?>">
 
-                    <a href="session_admin.php" class="text-decoration-none">Menu Admin</a>
+                    <a href="session_admin.php"
+                        class="text-decoration-none <?php if($_SESSION['akses'] == 'menu_admin'){ ?> text-light  <?php } ?>">Menu
+                        Admin</a>
                 </div>
                 <?php endif ?>
-                <div class="col-lg-4 col-12 card p-4 m-2">
-                    <a href="session_sistem_nilai.php" class="text-decoration-none">Sistem Nilai</a>
+                <div
+                    class="col-lg-4 col-12 card p-4 m-2 <?php if($_SESSION['akses'] == 'sistem_nilai'){ ?> bg-info  <?php } ?>">
+                    <a href="session_sistem_nilai.php"
+                        class="text-decoration-none <?php if($_SESSION['akses'] == 'sistem_nilai'){ ?> text-light  <?php } ?>">Sistem
+                        Nilai</a>
 
                 </div>
             </div>
