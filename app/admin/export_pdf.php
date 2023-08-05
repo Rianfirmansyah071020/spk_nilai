@@ -15,8 +15,8 @@ class PDF extends FPDF
     function Header()
     {        
         $this->Image('assets/sekolah.jpeg',20,6,22);
-        $this->SetFont('Times', 'B', 12);
-        $this->Cell(0, 5, 'PEMERINTAHAN KABUPATEN MERANGIN ', 0, 1, 'C');
+        $this->SetFont('Times', 'B', 11);
+        $this->Cell(0, 5, 'PEMERINTAHAN PROVINSI JAMBI ', 0, 1, 'C');
         $this->Cell(0, 5, 'DINAS PENDIDIKAN ', 0, 1, 'C');
         $this->SetFont('Times', 'B', 13);
         $this->Cell(0, 6, 'SMA NEGERI 13 MERANGIN ', 0, 1, 'C');
@@ -82,7 +82,7 @@ $pdf->Ln(7);
 $pdf->Cell(30, 8, 'Wali Kelas', 0, 0, 'R');
 $pdf->Cell(128, 8, 'Kepala Sekolah', 0, 0, 'R');
 $pdf->Ln(20);
-$pdf->Cell(38, 3, '_____________', 0, 0, 'R');
+$pdf->Cell(37, 3, '_____________', 0, 0, 'R');
 $pdf->Cell(121, 3, '_____________', 0, 0, 'R');
 $pdf->Ln();
 $pdf->Cell(24, 8, 'NIP : ', 0, 0, 'R');
