@@ -15,15 +15,16 @@ class PDF extends FPDF
     function Header()
     {        
         $this->Image('assets/sekolah.jpeg',20,6,22);
-        $this->SetFont('Arial', 'B', 12);
+        $this->SetFont('Times', 'B', 12);
         $this->Cell(0, 5, 'PEMERINTAHAN KABUPATEN MERANGIN ', 0, 1, 'C');
-        $this->SetFont('Arial', 'B', 13);
+        $this->Cell(0, 5, 'DINAS PENDIDIKAN ', 0, 1, 'C');
+        $this->SetFont('Times', 'B', 13);
         $this->Cell(0, 6, 'SMA NEGERI 13 MERANGIN ', 0, 1, 'C');
-        $this->SetFont('Arial', '', 9);
+        $this->SetFont('Times', '', 9);
         $this->Cell(0, 6, 'Jln,Pendidikan No. 1, Suko Rejo, Kec.Margo Tabir, Kab.Merangin Prov.Jambi ', 0, 1, 'C');
-        $this->Cell(0, 3, '___________________________________________________________________________________', 0, 1, 'C');
+        $this->Line(10, 35, 200, 35);
         $this->Ln(7);
-        $this->SetFont('Arial', 'B', 11);
+        $this->SetFont('Times', 'B', 11);
         $this->Cell(0, 6, 'DAFTAR SISWA BERPRESTASI '. $_GET['nama_kelas'], 0, 1, 'C');
         $this->Ln(7);
     }
@@ -31,7 +32,7 @@ class PDF extends FPDF
     function Footer()
     {
         $this->SetY(-15);
-        $this->SetFont('Arial', 'I', 6);
+        $this->SetFont('Times', 'I', 6);
         $this->Cell(30, 10, 'SMA NEGERI 13 MERANGIN', 0, 0, 'L');
         // $this->Cell(80, 10, 'Halaman ' . $this->PageNo(), 0, 0, 'R');
         $this->Ln();
@@ -40,7 +41,7 @@ class PDF extends FPDF
 
 $pdf = new PDF();
 $pdf->AddPage();
-$pdf->SetFont('Arial', '', 9);
+$pdf->SetFont('Times', '', 9);
 
 // Ambil data nilai siswa dari sumber data Anda
 $id_kelas = $_GET['id_kelas'];
