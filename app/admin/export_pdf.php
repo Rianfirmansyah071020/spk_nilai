@@ -13,12 +13,15 @@ class PDF extends FPDF
 
     
     function Header()
-    {
+    {        
+        $this->Image('assets/sekolah.jpeg',20,6,22);
         $this->SetFont('Arial', 'B', 12);
+        $this->Cell(0, 5, 'PEMERINTAHAN KABUPATEN MERANGIN ', 0, 1, 'C');
+        $this->SetFont('Arial', 'B', 13);
         $this->Cell(0, 6, 'SMA NEGERI 13 MERANGIN ', 0, 1, 'C');
-        $this->SetFont('Arial', '', 10);
+        $this->SetFont('Arial', '', 9);
         $this->Cell(0, 6, 'Jln,Pendidikan No. 1, Suko Rejo, Kec.Margo Tabir, Kab.Merangin Prov.Jambi ', 0, 1, 'C');
-        $this->Cell(0, 6, '___________________________________________________________________________________', 0, 1, 'C');
+        $this->Cell(0, 3, '___________________________________________________________________________________', 0, 1, 'C');
         $this->Ln(7);
         $this->SetFont('Arial', 'B', 11);
         $this->Cell(0, 6, 'DAFTAR SISWA BERPRESTASI '. $_GET['nama_kelas'], 0, 1, 'C');
@@ -29,7 +32,8 @@ class PDF extends FPDF
     {
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 6);
-        $this->Cell(0, 10, 'Halaman ' . $this->PageNo(), 0, 0, 'C');
+        $this->Cell(30, 10, 'SMA NEGERI 13 MERANGIN', 0, 0, 'L');
+        // $this->Cell(80, 10, 'Halaman ' . $this->PageNo(), 0, 0, 'R');
         $this->Ln();
     }
 }
@@ -72,11 +76,25 @@ foreach ($dataSiswa as $siswa) {
     // $pdf->Cell(40, 10, $siswa['nilai'], 1, 1, 'C');
 }
 $pdf->Ln(10);
-$pdf->Cell(180, 8, 'Margo Tabir  ' . date('d-m-Y'), 0, 0, 'R');
-$pdf->Ln();
-$pdf->Cell(170, 8, 'Wali Kelas', 0, 0, 'R');
+$pdf->Cell(170, 8, 'Margo Tabir  ' . date('d-m-Y'), 0, 0, 'R');
+$pdf->Ln(7);
+$pdf->Cell(30, 8, 'Wali Kelas', 0, 0, 'R');
+$pdf->Cell(128, 8, 'Kepala Sekolah', 0, 0, 'R');
 $pdf->Ln(20);
-$pdf->Cell(160, 8, 'Nip:', 0, 0, 'R');
+$pdf->Cell(38, 3, '_____________', 0, 0, 'R');
+$pdf->Cell(121, 3, '_____________', 0, 0, 'R');
+$pdf->Ln();
+$pdf->Cell(24, 8, 'NIP : ', 0, 0, 'R');
+$pdf->Cell(121, 8, 'NIP : ', 0, 0, 'R');
+// $pdf->Ln(10);
+// $pdf->Cell(60, 8, 'Wali Kelas', 0, 0, 'L');
+// $pdf->Ln(20);
+// $pdf->Cell(60, 8, 'Nip:', 0, 0, 'L');
+// $pdf->Cell(80, 8, 'Margo Tabir  ' . date('d-m-Y'), 0, 0, 'R');
+// $pdf->Ln();
+// $pdf->Cell(174, 8, 'Kepala Sekolah', 0, 0, 'R');
+// $pdf->Ln(20);
+// $pdf->Cell(160, 8, 'Nip:', 0, 0, 'R');
 
 $pdf->Output('Siswa Berprestasi' . $_GET['nama_kelas'].'.pdf', 'I');
 ?>
