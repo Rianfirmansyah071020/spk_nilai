@@ -54,6 +54,12 @@ require "../controller/controller.php";
                 </ol>
             </div>
 
+            <div class="row mt-2 justify-content-center">
+               <div class="col-lg-8 col-12 card p-4 shadow" style="border-bottom: 1px solid red; font-weight:bold; text-shadow:1px 1px 1px blue;">
+               <h3 class="text-center">OPTIMALISASI MANAJEMEN SEKOLAH DALAM PENENTUAN SISWA BERPRESTASI PADA SMAN 13 MERANGIN</h3>
+               </div>
+            </div>
+
             <div class="row p-3 justify-content-center align-content-center">
                 <?php if($_SESSION['level'] === 'admin') : ?>
                 <div

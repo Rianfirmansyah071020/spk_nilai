@@ -17,20 +17,20 @@ function login_pengguna($data)
 {
     global $koneksi;
 
-    $email = htmlspecialchars($data['email']);
+    $username = htmlspecialchars($data['username']);
     $password = htmlspecialchars($data['password']);    
 
-    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM admin WHERE email = '$email'"));
+    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'"));
 
     if($cekJumlahData === 1) {
 
         session_start();
-        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM admin WHERE email = '$email'");
+        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'");
         $dataPenggunaArray = mysqli_fetch_array($dataPengguna);
 
         if(password_verify($password, $dataPenggunaArray['password'])){
 
-            $_SESSION['email'] = $dataPenggunaArray['email'];
+            $_SESSION['username'] = $dataPenggunaArray['username'];
             $_SESSION['nama'] = $dataPenggunaArray['nama_admin'];
             $_SESSION['level'] = $dataPenggunaArray['level_user'];
             $_SESSION['login'] = true;
@@ -461,12 +461,13 @@ function tambah_admin($data)
     $nama_admin = htmlspecialchars($data['nama_admin']);
     $nip_admin = htmlspecialchars($data['nip_admin']);
     $email = htmlspecialchars($data['email']);
+    $username = htmlspecialchars($data['username']);
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     // kirim mailer
     $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
-    $pesan = 'Selamat bergabung ' . $data["nama_admin"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login email : ' . $data["email"] .' password : ' . $data["password"];
+    $pesan = 'Selamat bergabung ' . $data["nama_admin"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
 
         try {
             $mail = new PHPMailer(true);
@@ -503,7 +504,7 @@ function tambah_admin($data)
         $huruf = "ADM" . date('ymd');
         $idBaru = $huruf . sprintf("%08s", $urutan);
 
-        $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$email', '$password')");
+        $tambahadmin = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, username,password) VALUES ('$idBaru','admin', '$nama_admin', '$nip_admin', '$email','$username' ,'$password')");
 
         return mysqli_affected_rows($koneksi);
         } catch (\Throwable $th) {
@@ -520,11 +521,12 @@ function tambah_guru($data)
     $nama_guru = htmlspecialchars($data['nama_guru']);
     $nip_guru = htmlspecialchars($data['nip_guru']);
     $email = htmlspecialchars($data['email']);
+    $username = htmlspecialchars($data['username']);
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
-    $pesan = 'Selamat bergabung ' . $data["nama_guru"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login email : ' . $data["email"] .' password : ' . $data["password"];
+    $pesan = 'Selamat bergabung ' . $data["nama_guru"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
 
     
     try {
@@ -562,7 +564,7 @@ function tambah_guru($data)
     $huruf = "ADM". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahguru = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$email', '$password')");
+    $tambahguru = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, username,password) VALUES ('$idBaru','guru', '$nama_guru', '$nip_guru', '$email','$username', '$password')");
 
     return mysqli_affected_rows($koneksi);
     } catch (\Throwable $th) {
@@ -579,11 +581,12 @@ function tambah_kepsek($data)
     $nama_kepsek = htmlspecialchars($data['nama_kepsek']);
     $nip_kepsek = htmlspecialchars($data['nip_kepsek']);
     $email = htmlspecialchars($data['email']);
+    $username = htmlspecialchars($data['username']);
     $password = htmlspecialchars($data['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
-    $pesan = 'Selamat bergabung ' . $data["nama_kepsek"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login email : ' . $data["email"] .' password : ' . $data["password"];
+    $pesan = 'Selamat bergabung ' . $data["nama_kepsek"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
 
     
     
@@ -622,7 +625,7 @@ function tambah_kepsek($data)
     $huruf = "ADM". date('ymd');
     $idBaru = $huruf . sprintf("%08s", $urutan);
 
-    $tambahkepsek = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email, password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$email', '$password')");
+    $tambahkepsek = mysqli_query($koneksi, "INSERT INTO admin (id_admin,level_user ,nama_admin,nip_admin, email,username ,password) VALUES ('$idBaru','kepsek', '$nama_kepsek', '$nip_kepsek', '$email', '$username','$password')");
 
     return mysqli_affected_rows($koneksi);
         } catch (\Throwable $th) {

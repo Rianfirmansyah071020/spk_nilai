@@ -93,6 +93,15 @@ if(isset($_POST['simpan'])) {
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-2 col-md-2 col-12">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="username" id="username" class="form-control"
+                                    placeholder="username: xxxxx" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-2 col-md-2 col-12">
                                 <label for="email">Email</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">

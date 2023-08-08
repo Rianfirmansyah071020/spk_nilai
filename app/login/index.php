@@ -51,8 +51,9 @@ if($_SESSION['login'] == true) {
                                     </div>
                                     <form class="user" action="" method="post">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="email" id="exampleInputEmail"
-                                                aria-describedby="email" placeholder="email:xxx" required>
+                                            <input type="text" class="form-control" name="username"
+                                                id="exampleInputusername" aria-describedby="username"
+                                                placeholder="username:xxx" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control"
