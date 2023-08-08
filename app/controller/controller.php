@@ -58,6 +58,65 @@ function login_pengguna($data)
 }
 
 
+
+function lupa_password($data)
+{
+    global $koneksi;
+
+    $username = htmlspecialchars($data['username']);   
+
+    $cekJumlahData = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'"));
+
+    if($cekJumlahData === 1) {
+
+        session_start();
+        $dataPengguna = mysqli_query($koneksi, "SELECT * FROM admin WHERE username = '$username'");
+        $dataPenggunaArray = mysqli_fetch_array($dataPengguna);       
+
+
+        $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
+        $pesan = 'Anda dapat bergabung pada webiste kami berikut akun yang dapat anda gunakan untuk login username : ' . $dataPenggunaArray["username"] .' password : ' . $dataPenggunaArray["password_reel"];
+
+
+       try {
+        $mail = new PHPMailer(true);
+        //Server settings
+        // $mail->SMTPDebug = 2; //Enable verbose debug output
+        $mail->isSMTP(); //Send using SMTP
+        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->SMTPSecure = 'ssl'; //Enable implicit TLS encryption
+        $mail->SMTPAuth = true; //Enable SMTP authentication
+        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+         $mail->Username = 'smanmerangin73@gmail.com'; //SMTP username
+        $mail->Password = 'ttpmuvddjqplkoyn'; //SMTP password
+
+        //pengirim
+        $mail->setFrom('smanmerangin73@gmail.com', 'SMAN 13 Merangin');
+        $mail->addAddress($dataPenggunaArray['email']); //Add a recipient        
+
+        //Content
+        $mail->isHTML(true); //Set email format to HTML
+        $mail->Subject = $judul;
+        $mail->Body = $pesan;
+        $mail->AltBody = '';
+        //$mail->AddEmbeddedImage('gambar/logo.png', 'logo'); //abaikan jika tidak ada logo
+        //$mail->addAttachment(''); 
+
+        $mail->send();
+
+            return true;
+            
+       } catch (\Throwable $th) {
+        //throw $th;
+       }
+
+
+
+    }
+
+}
+
+
 // tambah siswa
 function tambah_siswa($data)  
 {
@@ -467,7 +526,7 @@ function tambah_admin($data)
 
     // kirim mailer
     $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
-    $pesan = 'Selamat bergabung ' . $data["nama_admin"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
+    $pesan = 'Selamat bergabung ' . $data["nama_admin"] .  ' di website kami berikut akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
 
         try {
             $mail = new PHPMailer(true);
@@ -526,7 +585,7 @@ function tambah_guru($data)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
-    $pesan = 'Selamat bergabung ' . $data["nama_guru"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
+    $pesan = 'Selamat bergabung ' . $data["nama_guru"] .  ' di website kami berikut akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
 
     
     try {
@@ -586,7 +645,7 @@ function tambah_kepsek($data)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $judul = 'Akun untuk login ke webiste SMAN Negeri 13 Merangin';
-    $pesan = 'Selamat bergabung ' . $data["nama_kepsek"] .  ' di website kami berikut ada akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
+    $pesan = 'Selamat bergabung ' . $data["nama_kepsek"] .  ' di website kami berikut akun yang dapat anda gunakan untuk login username : ' . $data["username"] .' password : ' . $data["password"];
 
     
     

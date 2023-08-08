@@ -1,11 +1,6 @@
 <?php
 session_start();
 error_reporting(0);
-if($_SESSION['login'] == true) {
-
-    header('Location:../admin/siswa.php');
-    exit;
-}
 
 ?>
 <!DOCTYPE html>
@@ -36,16 +31,18 @@ if($_SESSION['login'] == true) {
                             <div class="col-lg-12">
                                 <div class="login-form">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Login Disini</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Masukan Username Disini</h1>
                                         <?php
                                             require "../controller/controller.php";
 
-                                            if(isset($_POST['login'])) {
+                                            if(isset($_POST['lupa'])) {
 
-                                                if(login_pengguna($_POST)) { 
-                                                    
-                                                    
-                                                }
+                                                if(lupa_password($_POST) === true) { ?>
+                                        <script>
+                                        document.location.href = "index.php";
+                                        alert("Username dan password anda sudah dikirim ke email");
+                                        </script>
+                                        <?php     }
                                             }
                                         ?>
                                     </div>
@@ -55,17 +52,12 @@ if($_SESSION['login'] == true) {
                                                 id="exampleInputusername" aria-describedby="username"
                                                 placeholder="username:xxx" required>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password" class="form-control"
-                                                id="exampleInputPassword" placeholder="Password" required>
-                                        </div>
                                         <div class="form-group mt-4">
-                                            <button type="submit" name="login"
-                                                class="btn btn-primary w-100">Login</button>
+                                            <button type="submit" name="lupa"
+                                                class="btn btn-primary w-100">Kirim</button>
                                         </div>
                                         <div class="form-group mt-4">
                                             <a href="../../index.php" class="btn btn-warning">kembali</a>
-                                            <a href="lupa_password.php" class="btn btn-success">Lupa Password</a>
                                         </div>
                                     </form>
                                     <hr>
